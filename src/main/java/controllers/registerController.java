@@ -75,7 +75,7 @@ public class registerController {
 
     private void goBack(){
         try {
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("/prueba/interfaz/inicio.fxml"));
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("/interfaz/inicio.fxml"));
             Parent root= loader.load();
             Stage stage= (Stage) registerAnchorPane.getScene().getWindow();
             stage.setScene(new Scene(root));

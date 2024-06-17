@@ -15,22 +15,22 @@
             <Button fx:id="closeButton" layoutX="140.0" layoutY="324.0" mnemonicParsing="false" styleClass="add-btn" stylesheets="@dashboardDesign.css" text="Close" AnchorPane.leftAnchor="77.0" AnchorPane.rightAnchor="77.0" />
             <ImageView fx:id="logginImage" fitHeight="22.0" fitWidth="26.0" layoutX="87.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="203.0" AnchorPane.topAnchor="203.0">
                <image>
-                  <Image url="@../../imagenes/loggin.png" />
+                  <Image url="@../imagenes/loggin.png" />
                </image>
             </ImageView>
             <ImageView fx:id="registerImage" fitHeight="22.0" fitWidth="26.0" layoutX="87.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../imagenes/addUser.png" />
+                  <Image url="@../imagenes/addUser.png" />
                </image>
             </ImageView>
             <ImageView fx:id="closeImage" fitHeight="22.0" fitWidth="26.0" layoutX="87.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../imagenes/close.png" />
+                  <Image url="@../imagenes/close.png" />
                </image>
             </ImageView>
             <ImageView fx:id="companyLogo" fitHeight="150.0" fitWidth="200.0" layoutX="90.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="90.0">
                <image>
-                  <Image url="@../../imagenes/companyLogo.png" />
+                  <Image url="@../imagenes/companyLogo.png" />
                </image>
             </ImageView>
          </children>

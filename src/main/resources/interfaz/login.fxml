@@ -26,7 +26,7 @@
                         </Label>
                         <ImageView fx:id="loginImage" fitHeight="150.0" fitWidth="200.0" layoutX="55.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="225.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="76.0">
                            <image>
-                              <Image url="@../../imagenes/loggin.png" />
+                              <Image url="@../imagenes/loggin.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -49,7 +49,7 @@
                            <graphic>
                               <ImageView fx:id="imageBack" fitHeight="26.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../imagenes/close.png" />
+                                    <Image url="@../imagenes/close.png" />
                                  </image>
                               </ImageView>
                            </graphic>

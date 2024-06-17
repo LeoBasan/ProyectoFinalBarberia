@@ -4,5 +4,5 @@ module prueba.pruebaloginccs {
 
 
     opens controllers to javafx.fxml;
-    exports prueba.pruebaloginccs;
+    exports main;
 }

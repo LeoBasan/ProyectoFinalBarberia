@@ -50,10 +50,10 @@ public class inicioController {
         closeButton.setOnAction(event->closeApplication());
     }
     private void openLoginMenu(){
-        loadScene("/prueba/interfaz/login.fxml");
+        loadScene("/interfaz/login.fxml");
     }
     private void openRegisterMenu(){
-        loadScene("/prueba/interfaz/register.fxml");
+        loadScene("/interfaz/register.fxml");
     }
     private void closeApplication(){
         Platform.exit();
