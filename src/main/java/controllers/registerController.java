@@ -1,5 +1,8 @@
 package controllers;
 
+import com.aplicacion.cliente.Cliente;
+import com.aplicacion.cliente.ClienteRepository;
+import com.aplicacion.cliente.ClienteView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,9 +18,12 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class registerController {
 
+    private ClienteRepository clienteRepository;
+    private ClienteView clienteView;
     @FXML
     private TextField adressField;
 
@@ -69,8 +75,11 @@ public class registerController {
     @FXML
     private Label welcomeMessage;
 
-    public void initialize(){
+    public void initialize(ClienteRepository clienteRepository ){
+        this.clienteView = new ClienteView();
+        this.clienteRepository = clienteRepository;
         backButton.setOnAction(event->goBack());
+        registerButton.setOnAction(event->handleRegister());
     }
 
     private void goBack(){
@@ -82,6 +91,23 @@ public class registerController {
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void handleRegister(){ ///acá probar si puedo usar los trycatch para las validaciones
+        String nombre = nameField.getText();
+        String apellido = lastNameField.getText();
+        String usuario = usernameField.getText();
+        String contrasena = passwordField.getText();
+        String direccion = adressField.getText();
+        String telefono = phoneNumberField.getText();
+
+        Cliente newCliente = new Cliente(nombre,apellido,usuario,contrasena,direccion,telefono);
+        clienteRepository.agregarTurnos(newCliente);
+        Map<String,Cliente> mapaCliente =clienteRepository.getMapaCliente();
+        clienteView.viewClientes(mapaCliente);
+
+
     }
 
 }
