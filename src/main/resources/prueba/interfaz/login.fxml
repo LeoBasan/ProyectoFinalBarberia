@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="645.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.loginController">
+   <children>
+      <AnchorPane fx:id="anchorPane" prefHeight="455.0" prefWidth="645.0">
+         <children>
+            <SplitPane fx:id="splitaPane" dividerPositions="0.4" prefHeight="455.0" prefWidth="645.0">
+              <items>
+                <AnchorPane fx:id="splitAnchorPane1" minHeight="0.0" minWidth="0.0" prefHeight="455.0" prefWidth="100.0" styleClass="card" stylesheets="@dashboardDesign.css">
+                     <children>
+                        <Label fx:id="companyLabel" layoutX="54.0" layoutY="323.0" stylesheets="@dashboardDesign.css" text="Barber Clean" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="53.0" AnchorPane.rightAnchor="53.0" AnchorPane.topAnchor="315.0">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="loginImage" fitHeight="150.0" fitWidth="200.0" layoutX="55.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="225.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="76.0">
+                           <image>
+                              <Image url="@../../imagenes/loggin.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane fx:id="splitAnchorPane2" minHeight="0.0" minWidth="0.0" prefHeight="455.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="welcomeMessageLabel" layoutX="128.0" layoutY="58.0" prefHeight="35.0" prefWidth="121.0" text="Bienvenido" textAlignment="CENTER" textFill="#256b51" AnchorPane.bottomAnchor="358.0" AnchorPane.leftAnchor="128.0" AnchorPane.rightAnchor="128.0" AnchorPane.topAnchor="58.0">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="userTextField" layoutX="114.0" layoutY="155.0" promptText="User" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="270.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="155.0" />
+                        <PasswordField fx:id="passwordField" layoutX="114.0" layoutY="226.0" promptText="Password" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" />
+                        <Button fx:id="logginButton" layoutX="117.0" layoutY="322.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="150.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="Loggin" textAlignment="CENTER" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="117.0">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="buttonBack" layoutX="168.0" layoutY="382.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="48.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css">
+                           <graphic>
+                              <ImageView fx:id="imageBack" fitHeight="26.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../imagenes/close.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

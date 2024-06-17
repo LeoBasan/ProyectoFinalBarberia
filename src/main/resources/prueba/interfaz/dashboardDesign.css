@@ -1,0 +1,390 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 09 21, 22, 4:12:17 PM
+    Author     : WINDOWS 10
+*/
+
+.top-form{
+    -fx-background-color:#fff;
+    -fx-border-color:#000;
+    -fx-border-width:.4px .4px .2px .4px;
+}
+.frente-arriba{
+
+    -fx-border-color:#000;
+    -fx-border-width:.4px .4px .2px .4px;
+    -fx-background-color:#008080;
+    //-fx-background-image: url("atrumblack.clinicaveterinaria.img.fondoVete.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+}
+.semi-top-form{
+    -fx-background-color:#efefef;
+    -fx-border-color:#000;
+    -fx-border-width:.2px .4px .8px .4px;
+}
+
+.close{
+    -fx-background-color:transparent;
+    -fx-cursor:hand;
+}
+.close:hover{
+    -fx-background-color:#ff3547;
+}
+
+.minimize{
+    -fx-background-color:transparent;
+    -fx-cursor:hand;
+}
+.minimize:hover{
+    -fx-background-color:#ddd;
+}
+
+.nav-form{
+    -fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
+}
+.nav-left{
+    -fx-background-color:#272b3f;
+}
+.jfx-button1{
+    -fx-background-color:  #1976D2;
+    -fx-text-fill: white;
+}
+.jfx-button1:hover{
+    -fx-background-color: #c62828;
+}
+
+/* Establece el fondo suave, borde curvo y color del texto para JFXButton */
+.jfx-button2 {
+
+
+    -fx-border-color:linear-gradient(to bottom right, #272b3f, #256b51);
+
+    -fx-font-size:18px;
+    -fx-font-family:"Tahoma";
+    -fx-border-width:1px;
+
+    -fx-background-color:transparent; /* Fondo suave del botón (cambiar según tus preferencias) */
+    -fx-background-radius: 5; /* Borde curvo */
+    -fx-border-radius: 5; /* Borde curvo */
+    -fx-text-fill: #000000; /* Color del texto (cambiar según tus preferencias) */
+}
+
+/* Cambia el color del fondo cuando el botón está enfocado */
+.jfx-button2:focused {
+    -fx-background-color:  #256b51; /* Cambia el color del fondo cuando el botón está enfocado (cambiar según tus preferencias) */
+        -fx-background-radius: 5; /* Borde curvo */
+        -fx-border-radius: 5; /* Borde curvo */
+            -fx-text-fill:#fff;
+}
+
+/* Cambia el color del fondo al pasar el ratón sobre el botón */
+.jfx-button2:hover {
+   /* -fx-background-color: ##18a383;  Cambia el color del fondo al pasar el ratón sobre el botón (cambiar según tus preferencias) */
+    -fx-background-radius: 5; /* Borde curvo */
+    -fx-border-radius: 5; /* Borde curvo */
+}
+
+.nav-btn{
+    -fx-background-color:transparent;
+    -fx-cursor:hand;
+    -fx-font-family:"Tahoma";
+    -fx-font-size:14px;
+    -fx-text-fill:#fff;
+    -fx-alignment:CENTER-LEFT;
+}
+
+.logout{
+    -fx-background-color:#219a6a;
+    -fx-background-radius:10px;
+    -fx-cursor:hand;
+}
+.logout:hover{
+    -fx-background-color:#18a383;
+}
+
+.shadow{
+    -fx-effect:dropshadow(three-pass-box, rgba(0,0,0,0.5), 6,0,0,0);
+}
+
+.white-bg{
+    -fx-background-color:#fff;
+    -fx-background-radius:8px;
+}
+
+.card{
+    -fx-background-color:linear-gradient(to right, #272b3f, #256b51);
+    -fx-background-radius:5px;
+}
+
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-border-radius: 8px;
+    -fx-padding: 0px;
+}
+
+.table-view .table-column {
+    -fx-alignment: CENTER;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-background-insets: 0 0 0 0;
+    -fx-background-radius: 8px 8px 0px 0px;
+}
+
+.table-view .column-header, .filter {
+    -fx-background-color: transparent;
+    -fx-min-height: 40px; /* Cambié -fx-size a -fx-min-height para establecer la altura mínima */
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #fff;
+    -fx-font-family: "Tahoma";
+}
+
+/* Agregado para mostrar las líneas de la tabla */
+.table-row-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: linear-gradient(to bottom right, #272b3f, #256b51);
+}
+/* Estilos para una nueva tabla con otro nombre */
+.new-table-view .table-column {
+    -fx-alignment: CENTER;
+}
+
+.new-table-view .column-header-background {
+    -fx-background-color: linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-background-insets: 0 0 0 0;
+    -fx-background-radius: 8px 8px 0px 0px;
+}
+
+.new-table-view .column-header, .new-filter {
+    -fx-background-color: transparent;
+    -fx-min-height: 40px; /* Cambié -fx-size a -fx-min-height para establecer la altura mínima */
+}
+
+.new-table-view .column-header .label {
+    -fx-text-fill: #fff;
+    -fx-font-family: "Tahoma";
+    -fx-font-size: 10px; /* Tamaño de letra diferente */
+}
+
+.textfield{
+    -fx-background-color:linear-gradient(to bottom, #efefef, #eee);
+    -fx-border-color:linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-border-width:.8px;
+    -fx-font-family:"Tahoma";
+    -fx-border-radius:4px;
+}
+.textfield:focused{
+    -fx-border-width:1.8px;
+    -fx-background-color:#fff;
+}
+
+.search{
+    -fx-background-color:transparent;
+    -fx-border-color:linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-border-radius:5px;
+    -fx-font-size:18px;
+    -fx-font-family:"Tahoma";
+    -fx-border-width:1px;
+    -fx-padding:0px 0px 0px 28px;
+     -fx-pref-height: 40px; /* Ajusta la altura preferida del TextField */
+}
+.search:focused{
+    -fx-border-width:2px;
+    -fx-padding: 0px 0px 0px 28px; /* Ajusta el padding para mantener el texto en la misma posición */
+
+}
+.search-vista-tratamiento{
+    -fx-background-color:transparent;
+    -fx-border-color:linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-border-radius:5px;
+    -fx-font-size:12px;
+    -fx-font-family:"Tahoma";
+    -fx-border-width:1px;
+    -fx-padding:0px 0px 0px 28px;
+     -fx-pref-height: 40px; /* Ajusta la altura preferida del TextField */
+}
+.search-vista-tratamiento:focused{
+    -fx-border-width:2px;
+    -fx-padding: 0px 0px 0px 28px; /* Ajusta el padding para mantener el texto en la misma posición */
+
+}
+.import-btn{
+    -fx-background-color:#ddd;
+    -fx-text-fill:red;
+    -fx-cursor:hand;
+}
+
+.add-btn{
+    -fx-background-color:#272b3f;
+    -fx-background-radius:8px;
+    -fx-text-fill:#fff;
+    -fx-font-size:14px;
+    -fx-font-family:"Tahoma";
+    -fx-cursor:hand;
+     -fx-alignment: center-right; /* Alinea el texto al centro-derecha al pasar el ratón sobre el botón */
+}
+.add-btn:hover{
+    -fx-background-color:#3357a4;
+}
+.add-btn-center{
+    -fx-background-color:#272b3f;
+    -fx-background-radius:8px;
+    -fx-text-fill:#fff;
+    -fx-font-size:14px;
+    -fx-font-family:"Tahoma";
+    -fx-cursor:hand;
+    -fx-alignment: center; /* Alinea el texto al centro al pasar el ratón sobre el botón */
+}
+.add-btn-center:hover{
+    -fx-background-color:#3357a4;
+}
+.izquierda-btn {
+    -fx-text-fill: #fff; /* Establece el color del texto del botón */
+    -fx-font-size: 14px; /* Establece el tamaño de la fuente del texto del botón */
+    -fx-alignment: center-left; /* Alinea el texto al centro-izquierda dentro del botón */
+     -fx-font-family:"Tahoma";
+}
+
+.izquierda-btn:hover {
+    -fx-text-fill: #309a65; /* Cambia el color del texto al pasar el ratón sobre el botón */
+    -fx-font-size: 17px; /* Ajusta el tamaño del texto al pasar el ratón sobre el botón */
+    -fx-alignment: center-left; /* Alinea el texto al centro-izquierda al pasar el ratón sobre el botón */
+    -fx-cursor: hand; /* Cambia el cursor al pasar el ratón sobre el botón */
+}
+
+.update-btn{
+    -fx-background-color:#327252;
+    -fx-background-radius:8px;
+    -fx-text-fill:#fff;
+    -fx-font-size:14px;
+    -fx-font-family:"Tahoma";
+    -fx-cursor:hand;
+}
+.update-btn:hover{
+    -fx-background-color:#309a65;
+}
+
+.delete-btn{
+    -fx-background-color:#86253f;
+    -fx-background-radius:8px;
+    -fx-text-fill:#fff;
+    -fx-font-size:14px;
+    -fx-font-family:"Tahoma";
+    -fx-cursor:hand;
+     -fx-alignment: center-right; /* Alinea el texto al centro-derecha al pasar el ratón sobre el botón */
+}
+.delete-btn:hover{
+    -fx-background-color:#ae1d46;
+}
+/* Establece el color inicial del DatePicker */
+.date-picker {
+    -fx-background-color: #fff; /* Cambia este color según tus preferencias */
+    -fx-border-width: 0 0 1 0; /* Establece el ancho del borde a 1 en la parte inferior y 0 en el resto */
+    -fx-border-color: grey; /* Color del borde inicial */
+}
+
+/* Cambia el color cuando el DatePicker está enfocado */
+.date-picker:focused {
+    -fx-background-color: #a0a0a0; /* Cambia este color según tus preferencias */
+    -fx-border-width: 0 0 2 0; /* Establece el ancho del borde a 2 en la parte inferior y 0 en el resto */
+    -fx-border-color: #272b3f; /* Color del borde cuando el DatePicker está enfocado */
+}
+
+.clear-btn{
+    -fx-background-color:#753566;
+    -fx-background-radius:8px;
+    -fx-text-fill:#fff;
+    -fx-font-size:14px;
+    -fx-font-family:"Tahoma";
+    -fx-cursor:hand;
+     -fx-alignment: center-right; /* Alinea el texto al centro-derecha al pasar el ratón sobre el botón */
+}
+.clear-btn:hover{
+    -fx-background-color:#9d3485;
+}
+
+.label-info{
+    -fx-background-color:transparent;
+    -fx-border-color:linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-border-radius:4px;
+    -fx-padding:0px 0px 0px 8px;
+}
+.label-mascota{
+    -fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
+        -fx-text-fill:#fff;
+        -fx-font-size:14px;
+    -fx-border-radius:4px;
+    -fx-padding:0px 0px 0px 8px;
+}
+
+.jfx-text-field {
+
+    -fx-border-color: grey; /*Cambia el color del borde a gris */
+    -fx-border-width: 0 0 1 0; /*Establece el ancho del borde a 2 en la parte inferior y 0 en el resto*/
+}
+
+.jfx-text-field:focused {
+    -fx-border-width: 0 0 2 0; /*Establece el ancho del borde a 2 en la parte inferior y 0 en el resto*/
+    -fx-border-color: #272b3f;
+}
+.text-field {
+  -fx-background-color: transparent; /* Hace que el fondo sea transparente */
+
+
+}
+
+.jfx-combo-box {
+    -fx-font-family: "Tahoma";
+    -fx-font-size: 12px;
+    -fx-text-fill: #000000; /* Color del texto cuando no está enfocado */
+}
+
+.jfx-combo-box:focused {
+    -jfx-focus-color: #272b3f; /* Color del foco cuando el JFXComboBox está enfocado */
+}
+
+.jfx-combo-box .jfx-button {
+    -fx-background-color: #CCCCCC; /* Color del botón desplegable */
+}
+
+.jfx-combo-box .list-cell {
+    -fx-font-family: "Tahoma";
+    -fx-font-size: 12px;
+    -fx-text-fill: #000000; /* Color del texto en las opciones del JFXComboBox */
+}
+
+.jfx-combo-box .list-cell:hover {
+    -fx-background-color: #E0E0E0; /* Cambia el color de fondo al pasar el ratón sobre una opción */
+}
+
+.jfx-combo-box .list-view {
+    -fx-background-color: #FFFFFF; /* Color de fondo del menú desplegable */
+}
+.date-picker-popup > .popup-content {
+    -fx-padding: 0; /* Elimina el relleno del contenido del calendario */
+}
+
+.date-picker-popup .calendar-grid {
+    -fx-pref-width: 300px; /* Ajusta el ancho del calendario desplegado según tus necesidades */
+}
+
+.date-picker-popup .calendar {
+    -fx-background-color: transparent; /* Hace que el fondo del calendario sea transparente */
+}
+
+.date-picker-popup .calendar .day-cell {
+    -fx-background-color: transparent; /* Hace que el fondo de las celdas del calendario sea transparente */
+}
+
+.date-picker-popup .calendar .month-year-pane {
+    -fx-background-color: transparent; /* Hace que el fondo del selector de mes y año sea transparente */
+}
