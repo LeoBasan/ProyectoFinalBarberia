@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Barbero extends Persona {
     private Integer aniosExperiencia;
-    public Barbero(String nombre, String apellido, String usuario, String contrasena,Integer aniosExperiencia) {
-        super(nombre, apellido, usuario, contrasena);
+    public Barbero(String nombre, String apellido, String usuario, String contrasena,Integer aniosExperiencia,String email) {
+        super(nombre, apellido, usuario, contrasena,email);
         this.aniosExperiencia = aniosExperiencia;
     }
 

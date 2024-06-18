@@ -2,10 +2,7 @@ package controllers;
 
 import com.aplicacion.cliente.Cliente;
 import com.aplicacion.cliente.ClienteView;
-import com.aplicacion.excepciones.CampoVacioException;
-import com.aplicacion.excepciones.LetrasyNumerosException;
-import com.aplicacion.excepciones.SoloLetrasException;
-import com.aplicacion.excepciones.SoloNumerosException;
+import com.aplicacion.excepciones.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -46,6 +43,9 @@ public class registerController extends BaseController{
     @FXML
     private TextField phoneNumberField;
 
+
+    @FXML
+    private TextField emailField;
     @FXML
     private AnchorPane registerAnchorPane;
 
@@ -92,7 +92,8 @@ public class registerController extends BaseController{
     private Label addressErrorLabel;
     @FXML
     private Label phoneNumberErrorLabel;
-
+    @FXML
+    private Label emailErrorLabel;
     @FXML
     private Label errorMessage;
 
@@ -149,6 +150,12 @@ public class registerController extends BaseController{
         }
     }
 
+    public void validarEmail(String valor,String fieldName){
+        if (!valor.matches("^[\\w._%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) { //verifica que la cadena de caracteres contiene un "@" y un "."
+            throw new EmailException("El campo " + fieldName + " debe poseer un formato valido");
+        }
+    }
+
     public void agregarListener(TextField textField,Label errorLabel, String fieldname){ //sirve para validar el texto en tiempo real
           textField.textProperty().addListener((observable,oldValue,newValue) -> {;
                     try {
@@ -157,12 +164,15 @@ public class registerController extends BaseController{
                             validarSoloLetras(newValue,fieldname);
                         }else if(fieldname.equalsIgnoreCase("Telefono")){ // si es telefono verifica que son 10 digitos
                             validarSoloNumeros(newValue,fieldname);
-                        }else if(fieldname.equalsIgnoreCase("Direccion")){
+                        }else if(fieldname.equalsIgnoreCase("Direccion")){ // si es direccion verifica que tenga letra,espacio y numeros
                             validarLetrasYNumeros(newValue,fieldname);
+                        } else if (fieldname.equalsIgnoreCase("Email")) {
+                            validarEmail(newValue,fieldname);
+
                         }
                         errorLabel.setText("");
                         errorMessage.setText("");
-                    } catch (CampoVacioException  | SoloLetrasException | SoloNumerosException | LetrasyNumerosException e) {  // se utiliza el | para capturar mas de una excepcion en el mismo catch
+                    } catch (CampoVacioException  | SoloLetrasException | SoloNumerosException | LetrasyNumerosException | EmailException e) {  // se utiliza el | para capturar mas de una excepcion en el mismo catch
                         errorLabel.setTextFill(Color.RED);
                         if(e instanceof  CampoVacioException) {
                             errorLabel.setText("El campo " + fieldname + " no puede estar vacío.");
@@ -172,6 +182,8 @@ public class registerController extends BaseController{
                             errorLabel.setText("el campo" + fieldname + " debe contener 10 dígitos.");
                         }else if ( e instanceof  LetrasyNumerosException){
                             errorLabel.setText("El campo" + fieldname + " debe ser una dirección valida.");
+                        }else if(e instanceof EmailException ){
+                            errorLabel.setText("El campo " + fieldname + " tiene que poseer un formato valida");
                         }
                         errorMessage.setText("Error: " + e.getMessage()); // muestra el mensaje de error
                         System.out.println(e.getMessage());
@@ -185,6 +197,7 @@ public class registerController extends BaseController{
         agregarListener(passwordField,passwordErrorLabel, "Contraseña");
         agregarListener(adressField,addressErrorLabel,"Direccion");
         agregarListener(phoneNumberField,phoneNumberErrorLabel,"Telefono");
+        agregarListener(emailField,emailErrorLabel,"Email");
     }
 
 
@@ -198,14 +211,16 @@ public class registerController extends BaseController{
             String contrasena = passwordField.getText();
             String direccion = adressField.getText();
             String telefono = phoneNumberField.getText();
+            String email = emailField.getText();
             validarCamposVacios(nombre,apellido,usuario,contrasena,direccion,telefono);
             validarSoloLetras(nombre,"Nombre");
             validarSoloLetras(apellido,"Apellido");               //Si pasa toda estas validaciones crea el cliente.
             validarLetrasYNumeros(direccion,"Direccion");
             validarSoloNumeros(telefono,"Telefono");
+            validarEmail(email,"Email");
 
 
-            Cliente newCliente = new Cliente(nombre,apellido,usuario,contrasena,direccion,telefono);
+            Cliente newCliente = new Cliente(nombre,apellido,usuario,contrasena,direccion,telefono,email);
             getClienteRepository().agregarTurnos(newCliente);
             Map<String,Cliente> mapaCliente =getClienteRepository().getMapaCliente();
             clienteView.viewClientes(mapaCliente);

@@ -12,14 +12,16 @@ public abstract class Persona {
         private String apellido;
         private String usuario;
         private String contrasena;
+        private String email;
         private List<Turno> turnos;
 
-    public Persona(String nombre, String apellido, String usuario, String contrasena) {
+    public Persona(String nombre, String apellido, String usuario, String contrasena,String email) {
         this.id = ++counter;
         this.nombre = nombre;
         this.apellido = apellido;
         this.usuario = usuario;
         this.contrasena = contrasena;
+        this.email = email;
         this.turnos = new ArrayList<>();
     }
 
@@ -69,5 +71,13 @@ public abstract class Persona {
 
     public void setTurnos(List<Turno> turnos) {
         this.turnos = turnos;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

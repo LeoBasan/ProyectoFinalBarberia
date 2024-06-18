@@ -12,7 +12,9 @@ public class ClienteView {
             System.out.println("Nombre y apellido del Cliente: " + cliente.getNombre() + " " + cliente.getApellido());
             System.out.println("Telefono: " + cliente.getNumTelefono());
             System.out.println("Direccion: " + cliente.getDireccion());
-            System.out.println("Nombre de usuario: " + cliente.getUsuario());;
+            System.out.println("Nombre de usuario: " + cliente.getUsuario());
+            System.out.println("Contraseña: " + cliente.getContrasena());
+            System.out.println("Email: " + cliente.getEmail());
 
             }
         }
