@@ -1,5 +1,7 @@
 package controllers;
 
+import com.aplicacion.barbero.Barbero;
+import com.aplicacion.cliente.Cliente;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class loginController {
+public class loginController extends BaseController{
 
     @FXML
     private AnchorPane anchorPane;
@@ -58,17 +60,35 @@ public class loginController {
     private Label welcomeMessageLabel;
 
     public void initialize(){
-        buttonBack.setOnAction(event->goBack());
+        logginButton.setOnAction(event -> handleLogin());//lo mando a loguearse, y falta despues que avance al siguiente menu
+        buttonBack.setOnAction(event->goBack());//lo mando al menu de inicio
     }
 
-    private void goBack(){
+    private void goBack(){//vuelvo al menu de inicio
         try {
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("/interfaz/inicio.fxml"));
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("/interfaz/inicio.fxml"));//vuelvo al inicio interfaz
             Parent root= loader.load();
             Stage stage= (Stage) anchorPane.getScene().getWindow();
             stage.setScene(new Scene(root));
         }catch (IOException e){
             e.printStackTrace();
+        }
+    }
+    private void handleLogin(){
+        String usuario= userTextField.getText();
+        String password= passwordField.getText();
+
+        Cliente cliente= getClienteRepository().findByUserAndPassword(usuario,password);
+        Barbero barbero= getBarberoRepository().findByUserAndPassword(usuario,password);
+        //Aca deberia validar si se encontraron bien los user y en ese caso mostrar en la interfaz (Leo agregar)
+        //Tendria que ver de agregar un cuadrito de mensaje de error o exito en la interfaz
+        //Mas facil por ahora muestro en consola
+        if(cliente!=null){
+            System.out.println("Cliente encontrado: "+ cliente.getNombre());
+        } else if (barbero!=null) {
+            System.out.println("Barbero encontrado: "+ barbero.getNombre());
+        }else {
+            System.out.println("Usuario o contraseña incorrectos: ");
         }
     }
 }

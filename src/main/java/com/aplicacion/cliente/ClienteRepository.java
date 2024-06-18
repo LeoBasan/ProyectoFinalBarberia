@@ -6,8 +6,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ClienteRepository implements Irepository<Cliente> {
-    private Map<String,Cliente> mapaCliente = new HashMap<>();
+    private static ClienteRepository instance;//uso esta variable para ver si esta instanciada
+    private Map<String,Cliente> mapaCliente;
 
+    private ClienteRepository() {
+        this.mapaCliente = new HashMap<>();
+    }
+    public static ClienteRepository getInstance(){//Principio singleton, se instancia una sola vez el repo
+        if(instance==null){//si no fue instanciada
+            instance= new ClienteRepository();//genero una nueva instancia
+        }
+        return instance;//sino retorno la que ya existe
+    }
     public Map<String, Cliente> getMapaCliente() {
         return mapaCliente;
     }
@@ -34,5 +44,13 @@ public class ClienteRepository implements Irepository<Cliente> {
     @Override
     public void updateTurno(Cliente obj) {
 
+    }
+    public Cliente findByUserAndPassword(String user, String password){//busco por usuario y contraseña
+        for(Map.Entry<String, Cliente> entry: mapaCliente.entrySet()){
+            if(entry.getValue().getUsuario().equals(user)&& entry.getValue().getContrasena().equals(password)){
+                return entry.getValue();
+            }
+        }
+        return null;
     }
 }

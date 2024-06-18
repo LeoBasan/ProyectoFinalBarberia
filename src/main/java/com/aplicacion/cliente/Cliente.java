@@ -16,7 +16,7 @@ public class Cliente extends Persona {
         this.direccion = direccion;
     }
 
-
+    //Falta el equals y el hashCode
     public String getNumTelefono() {
         return numTelefono;
     }

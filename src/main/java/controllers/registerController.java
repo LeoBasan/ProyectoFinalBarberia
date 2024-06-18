@@ -20,9 +20,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Map;
 
-public class registerController {
+public class registerController extends BaseController{
 
-    private ClienteRepository clienteRepository;
     private ClienteView clienteView;
     @FXML
     private TextField adressField;
@@ -75,16 +74,16 @@ public class registerController {
     @FXML
     private Label welcomeMessage;
 
-    public void initialize(ClienteRepository clienteRepository ){
-        this.clienteView = new ClienteView();
-        this.clienteRepository = clienteRepository;
-        backButton.setOnAction(event->goBack());
-        registerButton.setOnAction(event->handleRegister());
+    @FXML
+    public void initialize(){
+        this.clienteView = new ClienteView();//despues eliminar esto, solo es para ver en consola la carga correcta
+        backButton.setOnAction(event->goBack());//volver atras con el boton back
+        registerButton.setOnAction(event->handleRegister());//si se registra lo mando al repo
     }
 
-    private void goBack(){
+    private void goBack(){//metodo para retroceder al menu inicial
         try {
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("/interfaz/inicio.fxml"));
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("/interfaz/inicio.fxml"));//vuelvo al fxml del inicio
             Parent root= loader.load();
             Stage stage= (Stage) registerAnchorPane.getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -94,7 +93,7 @@ public class registerController {
     }
 
     @FXML
-    private void handleRegister(){ ///acá probar si puedo usar los trycatch para las validaciones
+    private void handleRegister(){ ///aca hacer validaciones con listener en tiempo real
         String nombre = nameField.getText();
         String apellido = lastNameField.getText();
         String usuario = usernameField.getText();
@@ -103,10 +102,9 @@ public class registerController {
         String telefono = phoneNumberField.getText();
 
         Cliente newCliente = new Cliente(nombre,apellido,usuario,contrasena,direccion,telefono);
-        clienteRepository.agregarTurnos(newCliente);
-        Map<String,Cliente> mapaCliente =clienteRepository.getMapaCliente();
+        getClienteRepository().agregarTurnos(newCliente);
+        Map<String,Cliente> mapaCliente =getClienteRepository().getMapaCliente();
         clienteView.viewClientes(mapaCliente);
-
 
     }
 

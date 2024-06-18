@@ -1,5 +1,8 @@
 package controllers;
 
+import com.aplicacion.barbero.BarberoRepository;
+import com.aplicacion.cliente.Cliente;
+import com.aplicacion.cliente.ClienteRepository;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -45,23 +48,31 @@ public class inicioController {
 
     @FXML
     public void initialize(){
-        logginButton.setOnAction(event->openLoginMenu());
-        registerButton.setOnAction(event->openRegisterMenu());
-        closeButton.setOnAction(event->closeApplication());
+        logginButton.setOnAction(event->openLoginMenu());//boton login entra a su menu
+        registerButton.setOnAction(event->openRegisterMenu());//boton register entra a su menu
+        closeButton.setOnAction(event->closeApplication());//boton close sale del programa
     }
     private void openLoginMenu(){
-        loadScene("/interfaz/login.fxml");
+        loadScene("/interfaz/login.fxml",ClienteRepository.getInstance(), BarberoRepository.getInstance());//menu login necesita el cliente y los barberos
     }
     private void openRegisterMenu(){
-        loadScene("/interfaz/register.fxml");
+        loadScene("/interfaz/register.fxml", ClienteRepository.getInstance(),null);//menu registro solo usa el repo de cliente
     }
     private void closeApplication(){
-        Platform.exit();
+        Platform.exit();//sale del programa
     }
-    private void loadScene(String fxmlPath){
+    private void loadScene(String fxmlPath, ClienteRepository clienteRepository, BarberoRepository barberoRepository){
         try{
             FXMLLoader loader= new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root= loader.load();
+            //traigo el controller de ambos repos
+            BaseController controller= loader.getController();
+            //seteo el repo de cliente
+            controller.setClienteRepository(clienteRepository);
+            if(barberoRepository!=null){//y si traigo el login, tambien seteo el de barbero
+                controller.setBarberoRepository(barberoRepository);
+            }
+            //avanzo a la escena elegida
             Stage stage=(Stage) stackPane.getScene().getWindow();
             stage.setScene(new Scene(root));
         }catch (IOException e){
