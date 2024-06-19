@@ -1,17 +1,28 @@
 package com.aplicacion.barbero;
 
 import com.aplicacion.interfaces.Irepository;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.*;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class BarberoRepository implements Irepository<Barbero> {
+    private static final String FILE_PATH = "src/main/resources/json/barbero.json";
+    private Gson gson = new Gson();
     private static BarberoRepository instance;
-    private List<Barbero> listaBarberos;
+    private Set<Barbero> setBarberos = new HashSet<>();
 
     private BarberoRepository(){
-        listaBarberos= new ArrayList<>();
-        precargarBarberos();
+        loadBarbero();
+        if(this.setBarberos.isEmpty()){
+            precargarBarberos();
+        }
+
     }
     public static BarberoRepository getInstance(){
         if(instance==null){
@@ -19,39 +30,73 @@ public class BarberoRepository implements Irepository<Barbero> {
         }
         return instance;
     }
-    private void precargarBarberos(){//Este metodo es para probar, pero cargamos una vez el json y listo se borra
-        listaBarberos.add(new Barbero("Leopoldo","Basanta","Leito", "leopoldobasanta@gmail.com", "123456",15));
-        listaBarberos.add(new Barbero("Alex","Barrientos","Alekei", "aalexjuliaan@gmail.com", "12345",10));
-        listaBarberos.add(new Barbero("Luciano","Dominella","Lucho", "luchodominella@gmail.com", "1234",30));
+    public void loadBarbero(){
+        try(Reader reader = new FileReader(FILE_PATH)){
+            Type setType = new TypeToken<Set<Barbero>>(){}.getType();
+            setBarberos = gson.fromJson(reader,setType);
+        }catch (FileNotFoundException e ){
+                setBarberos= new HashSet<>();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
-    public List<Barbero> getListaBarberos(){
-        return listaBarberos;
+    public void saveBarbero(){
+        try(Writer writer = new FileWriter(FILE_PATH)){
+            gson.toJson(setBarberos,writer);
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    private void precargarBarberos(){//Este metodo es para probar, pero cargamos una vez el json y listo se borra
+        setBarberos.add(new Barbero("44783789","Leopoldo","Basanta", "leopoldobasanta@gmail.com", "123456",15));
+        setBarberos.add(new Barbero("44783654","Alex","Barrientos", "aalexjuliaan@gmail.com", "12345",10));
+        setBarberos.add(new Barbero("44783098","Luciano","Dominella", "luchodominella@gmail.com", "1234",30));
+        saveBarbero();
+    }
+    public Set<Barbero> getListaBarberos(){
+        return setBarberos;
     }
     public Barbero findByEmailAndPassword(String email, String password){
-        for(Barbero barbero: listaBarberos){
+        for(Barbero barbero: setBarberos){
             if(barbero.getEmail().equals(email)&& barbero.getContrasena().equals(password)){
                 return barbero;
             }
         }
         return null;
     }
+
     @Override
     public void add(Barbero obj) {
-
+        this.setBarberos.add(obj);
+        /// en caso de que necesitemos cargar un barbero lo haremos manualmente.
+        saveBarbero();
     }
 
     @Override
-    public void delete(Integer id) {
-
+    public void delete(String dni) {
+        Barbero aux = findId(dni);
+        if (aux==null){
+            ///excepcion de que el barbero no existe
+        }else{
+            this.setBarberos.remove(aux);
+        }
+        saveBarbero();
     }
 
     @Override
-    public Barbero findId(Integer id) {
+    public Barbero findId(String dni) {
+        for(Barbero bar : this.setBarberos){
+            if(bar.getDni().equals(dni)){
+                return  bar;
+            }
+        }
         return null;
     }
 
     @Override
     public void update(Barbero obj) {
-
+        this.setBarberos.remove(obj);
+        this.setBarberos.add(obj);
+        saveBarbero();
     }
 }
