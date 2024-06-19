@@ -54,7 +54,7 @@ public class loginController extends BaseController{
     private StackPane stackPane;
 
     @FXML
-    private TextField userTextField;
+    private TextField emailField;
 
     @FXML
     private Label welcomeMessageLabel;
@@ -75,11 +75,11 @@ public class loginController extends BaseController{
         }
     }
     private void handleLogin(){
-        String usuario= userTextField.getText();
+        String email= emailField.getText();
         String password= passwordField.getText();
 
-        Cliente cliente= getClienteRepository().findByEmailAndPassword(usuario,password);
-        Barbero barbero= getBarberoRepository().findByEmailAndPassword(usuario,password);
+        Cliente cliente= getClienteRepository().findByEmailAndPassword(email,password);
+        Barbero barbero= getBarberoRepository().findByEmailAndPassword(email,password);
         //Aca deberia validar si se encontraron bien los user y en ese caso mostrar en la interfaz (Leo agregar)
         //Tendria que ver de agregar un cuadrito de mensaje de error o exito en la interfaz
         //Mas facil por ahora muestro en consola

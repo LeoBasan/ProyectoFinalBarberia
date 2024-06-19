@@ -6,29 +6,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane fx:dni="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="330.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.inicioController">
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="330.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.inicioController">
    <children>
-      <AnchorPane fx:dni="anchorPane" prefHeight="400.0" prefWidth="330.0" styleClass="card" stylesheets="@dashboardDesign.css">
+      <AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="330.0" styleClass="card" stylesheets="@dashboardDesign.css">
          <children>
-            <Button fx:dni="logginButton" layoutX="77.0" layoutY="200.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="187.0" styleClass="add-btn" stylesheets="@dashboardDesign.css" text="Login" AnchorPane.leftAnchor="77.0" AnchorPane.rightAnchor="77.0" />
-            <Button fx:dni="registerButton" layoutX="139.0" layoutY="262.0" mnemonicParsing="false" styleClass="add-btn" stylesheets="@dashboardDesign.css" text="Register" AnchorPane.leftAnchor="77.0" AnchorPane.rightAnchor="77.0" />
-            <Button fx:dni="closeButton" layoutX="140.0" layoutY="324.0" mnemonicParsing="false" styleClass="add-btn" stylesheets="@dashboardDesign.css" text="Close" AnchorPane.leftAnchor="77.0" AnchorPane.rightAnchor="77.0" />
-            <ImageView fx:dni="logginImage" fitHeight="22.0" fitWidth="26.0" layoutX="87.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="203.0" AnchorPane.topAnchor="203.0">
+            <Button fx:id="logginButton" layoutX="77.0" layoutY="200.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="187.0" styleClass="add-btn" stylesheets="@dashboardDesign.css" text="Login" AnchorPane.leftAnchor="77.0" AnchorPane.rightAnchor="77.0" />
+            <Button fx:id="registerButton" layoutX="139.0" layoutY="262.0" mnemonicParsing="false" styleClass="add-btn" stylesheets="@dashboardDesign.css" text="Register" AnchorPane.leftAnchor="77.0" AnchorPane.rightAnchor="77.0" />
+            <Button fx:id="closeButton" layoutX="140.0" layoutY="324.0" mnemonicParsing="false" styleClass="add-btn" stylesheets="@dashboardDesign.css" text="Close" AnchorPane.leftAnchor="77.0" AnchorPane.rightAnchor="77.0" />
+            <ImageView fx:id="logginImage" fitHeight="22.0" fitWidth="26.0" layoutX="87.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="203.0" AnchorPane.topAnchor="203.0">
                <image>
                   <Image url="@../imagenes/loggin.png" />
                </image>
             </ImageView>
-            <ImageView fx:dni="registerImage" fitHeight="22.0" fitWidth="26.0" layoutX="87.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="registerImage" fitHeight="22.0" fitWidth="26.0" layoutX="87.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../imagenes/addUser.png" />
                </image>
             </ImageView>
-            <ImageView fx:dni="closeImage" fitHeight="22.0" fitWidth="26.0" layoutX="87.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="closeImage" fitHeight="22.0" fitWidth="26.0" layoutX="87.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../imagenes/close.png" />
                </image>
             </ImageView>
-            <ImageView fx:dni="companyLogo" fitHeight="150.0" fitWidth="200.0" layoutX="90.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="90.0">
+            <ImageView fx:id="companyLogo" fitHeight="150.0" fitWidth="200.0" layoutX="90.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="90.0">
                <image>
                   <Image url="@../imagenes/companyLogo.png" />
                </image>

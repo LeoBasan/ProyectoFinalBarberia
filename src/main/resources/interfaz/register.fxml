@@ -11,62 +11,62 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:dni="registerStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="645.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.registerController">
+<StackPane fx:id="registerStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="645.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.registerController">
    <children>
-      <AnchorPane fx:dni="registerAnchorPane" prefHeight="500.0" prefWidth="645.0">
+      <AnchorPane fx:id="registerAnchorPane" prefHeight="500.0" prefWidth="645.0">
          <children>
-            <SplitPane fx:dni="registerSplitPane" dividerPositions="0.4" prefHeight="500.0" prefWidth="645.0">
+            <SplitPane fx:id="registerSplitPane" dividerPositions="0.4" prefHeight="500.0" prefWidth="645.0">
               <items>
-                <AnchorPane fx:dni="splitAnchorPane1" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="card" stylesheets="@dashboardDesign.css">
+                <AnchorPane fx:id="splitAnchorPane1" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="card" stylesheets="@dashboardDesign.css">
                      <children>
-                        <Label fx:dni="companyName" layoutX="113.0" layoutY="405.0" text="Barber Clean" textFill="WHITE" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="53.0" AnchorPane.rightAnchor="53.0">
+                        <Label fx:id="companyName" layoutX="113.0" layoutY="405.0" text="Barber Clean" textFill="WHITE" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="53.0" AnchorPane.rightAnchor="53.0">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Label>
-                        <ImageView fx:dni="registerImage" fitHeight="150.0" fitWidth="200.0" layoutX="52.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="52.0" AnchorPane.rightAnchor="52.0">
+                        <ImageView fx:id="registerImage" fitHeight="150.0" fitWidth="200.0" layoutX="52.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="52.0" AnchorPane.rightAnchor="52.0">
                            <image>
                               <Image url="@../imagenes/addUser.png" />
                            </image>
                         </ImageView>
                      </children>
                   </AnchorPane>
-                <AnchorPane fx:dni="splitAnchorPane2" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                <AnchorPane fx:id="splitAnchorPane2" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <Label fx:dni="welcomeMessage" layoutX="133.0" layoutY="14.0" text="Bienvenido" textFill="#256b51">
+                        <Label fx:id="welcomeMessage" layoutX="133.0" layoutY="14.0" text="Bienvenido" textFill="#256b51">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <TextField fx:dni="nameField" layoutX="72.0" layoutY="99.0" prefHeight="25.0" prefWidth="242.0" promptText="Name" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.leftAnchor="72.0" AnchorPane.rightAnchor="72.0" />
-                        <TextField fx:dni="lastNameField" layoutX="71.0" layoutY="139.0" prefHeight="25.0" prefWidth="242.0" promptText="LastName" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="334.0" />
-                        <TextField fx:dni="usernameField" layoutX="71.0" layoutY="179.0" prefHeight="25.0" prefWidth="242.0" promptText="Username" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="294.0" />
-                        <TextField fx:dni="adressField" layoutX="71.0" layoutY="259.0" prefHeight="25.0" prefWidth="242.0" promptText="Adress" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="214.0" />
-                        <TextField fx:dni="phoneNumberField" layoutX="71.0" layoutY="299.0" prefHeight="25.0" prefWidth="242.0" promptText="Phone Number" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="174.0" />
-                        <PasswordField fx:dni="passwordField" layoutX="73.0" layoutY="218.0" prefHeight="23.0" prefWidth="239.0" promptText="Password" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="255.0" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="71.0" AnchorPane.topAnchor="220.0" />
-                        <Label fx:dni="nameErrorLabel" layoutX="75.0" layoutY="125.0" style="-fx-text-fill: red;" text="" />
-                        <Label fx:dni="lastNameErrorLabel" layoutX="75.0" layoutY="165.0" style="-fx-text-fill: red;" text="" />
-                        <Label fx:dni="usernameErrorLabel" layoutX="75.0" layoutY="205.0" style="-fx-text-fill: red;" text="" />
-                        <Label fx:dni="passwordErrorLabel" layoutX="75.0" layoutY="244.0" style="-fx-text-fill: red;" text="" />
-                        <Label fx:dni="addressErrorLabel" layoutX="75.0" layoutY="285.0" style="-fx-text-fill: red;" text="" />
-                        <Label fx:dni="phoneNumberErrorLabel" layoutX="75.0" layoutY="325.0" style="-fx-text-fill: red;" text="" />
-                        <Label fx:dni="emailErrorLabel" layoutX="75.0" layoutY="361.0" style="-fx-text-fill: red;" text="" />
-                        <Button fx:dni="registerButton" layoutX="72.0" layoutY="382.0" mnemonicParsing="false" onAction="#handleRegister" prefHeight="30.0" prefWidth="242.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="Register" AnchorPane.leftAnchor="72.0" AnchorPane.rightAnchor="70.0">
-                           <Label fx:dni="errorMessage"  style="-fx-text-fill: red;" text="" />
+                        <TextField fx:id="nameField" layoutX="72.0" layoutY="99.0" prefHeight="25.0" prefWidth="242.0" promptText="Name" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.leftAnchor="72.0" AnchorPane.rightAnchor="72.0" />
+                        <TextField fx:id="lastNameField" layoutX="71.0" layoutY="139.0" prefHeight="25.0" prefWidth="242.0" promptText="LastName" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="334.0" />
+                        <TextField fx:id="usernameField" layoutX="71.0" layoutY="179.0" prefHeight="25.0" prefWidth="242.0" promptText="Username" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="294.0" />
+                        <TextField fx:id="adressField" layoutX="71.0" layoutY="259.0" prefHeight="25.0" prefWidth="242.0" promptText="Adress" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="214.0" />
+                        <TextField fx:id="phoneNumberField" layoutX="71.0" layoutY="299.0" prefHeight="25.0" prefWidth="242.0" promptText="Phone Number" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="174.0" />
+                        <PasswordField fx:id="passwordField" layoutX="73.0" layoutY="218.0" prefHeight="23.0" prefWidth="239.0" promptText="Password" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="255.0" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="71.0" AnchorPane.topAnchor="220.0" />
+                        <Label fx:id="nameErrorLabel" layoutX="75.0" layoutY="125.0" style="-fx-text-fill: red;" text="" />
+                        <Label fx:id="lastNameErrorLabel" layoutX="75.0" layoutY="165.0" style="-fx-text-fill: red;" text="" />
+                        <Label fx:id="usernameErrorLabel" layoutX="75.0" layoutY="205.0" style="-fx-text-fill: red;" text="" />
+                        <Label fx:id="passwordErrorLabel" layoutX="75.0" layoutY="244.0" style="-fx-text-fill: red;" text="" />
+                        <Label fx:id="addressErrorLabel" layoutX="75.0" layoutY="285.0" style="-fx-text-fill: red;" text="" />
+                        <Label fx:id="phoneNumberErrorLabel" layoutX="75.0" layoutY="325.0" style="-fx-text-fill: red;" text="" />
+                        <Label fx:id="emailErrorLabel" layoutX="75.0" layoutY="361.0" style="-fx-text-fill: red;" text="" />
+                        <Button fx:id="registerButton" layoutX="72.0" layoutY="382.0" mnemonicParsing="false" onAction="#handleRegister" prefHeight="30.0" prefWidth="242.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="Register" AnchorPane.leftAnchor="72.0" AnchorPane.rightAnchor="70.0">
+                           <Label fx:id="errorMessage"  style="-fx-text-fill: red;" text="" />
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button fx:dni="backButton" layoutX="168.0" layoutY="435.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="48.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" AnchorPane.leftAnchor="168.0" AnchorPane.rightAnchor="168.0">
+                        <Button fx:id="backButton" layoutX="168.0" layoutY="435.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="48.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" AnchorPane.leftAnchor="168.0" AnchorPane.rightAnchor="168.0">
                            <graphic>
-                              <ImageView fx:dni="backImage" fitHeight="26.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="backImage" fitHeight="26.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../imagenes/close.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Button>
-                        <TextField fx:dni="emailField" layoutX="71.0" layoutY="334.0" prefHeight="25.0" prefWidth="242.0" promptText="Email" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" />
+                        <TextField fx:id="emailField" layoutX="71.0" layoutY="334.0" prefHeight="25.0" prefWidth="242.0" promptText="Email" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" />
                      </children>
                   </AnchorPane>
               </items>
