@@ -7,11 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -74,7 +70,7 @@ public class registerController extends BaseController{
     private AnchorPane splitAnchorPane2;
 
     @FXML
-    private TextField usernameField;
+    private TextField dniField;
 
     @FXML
     private Label welcomeMessage;
@@ -85,7 +81,7 @@ public class registerController extends BaseController{
     @FXML
     private Label lastNameErrorLabel;
     @FXML
-    private Label usernameErrorLabel;
+    private Label dniErrorLabel;
     @FXML
     private Label passwordErrorLabel;
     @FXML
@@ -123,10 +119,10 @@ public class registerController extends BaseController{
         }
     }
 
-    public void validarCamposVacios(String nombre,String apellido,String usuario,String contrasena,String direccion,String telefono){
+    public void validarCamposVacios(String nombre,String apellido,String dni,String contrasena,String direccion,String telefono){
         if(nombre.trim().isEmpty()) throw new CampoVacioException("error. el campo nombre no puede estar vacío.");
         if(apellido.trim().isEmpty()) throw new CampoVacioException("error. el campo apellido no puede estar vacío.");
-        if(usuario.trim().isEmpty()) throw new CampoVacioException("error. el campo usuario no puede estar vacío.");
+        if(dni.trim().isEmpty()) throw new CampoVacioException("error. el campo dni no puede estar vacío.");
         if(contrasena.trim().isEmpty()) throw new CampoVacioException("error. el campo contraseña no puede estar vacío.");
         if(direccion.trim().isEmpty()) throw new CampoVacioException("error. el campo dirección no puede estar vacío.");
         if(telefono.trim().isEmpty()) throw new CampoVacioException("error. el campo teléfono no puede estar vacío.");
@@ -146,13 +142,19 @@ public class registerController extends BaseController{
 
     public void validarLetrasYNumeros(String valor, String fieldname){
         if(!valor.matches(".*[a-zA-Z]+\\s+\\d+.*") ) {  //verifica que despues de escribir letras haya obligatoriamente un espacio y despues numeros.
-            throw new LetrasyNumerosException("El campo " + fieldname + "debe contener letras y numeros");
+            throw new LetrasyNumerosException("El campo " + fieldname + " debe contener letras y numeros");
         }
     }
 
     public void validarEmail(String valor,String fieldName){
         if (!valor.matches("^[\\w._%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) { //verifica que la cadena de caracteres contiene un "@" y un "."
             throw new EmailException("El campo " + fieldName + " debe poseer un formato valido");
+        }
+    }
+
+    public void validarDni(String valor, String fieldName){
+        if(!valor.matches("^\\d{7,8}$")){ //verifica que sean solo o 7 o 8 digitos.
+            throw new DniInvalidoException("El campo " + fieldName + " no es valido");
         }
     }
 
@@ -168,11 +170,13 @@ public class registerController extends BaseController{
                             validarLetrasYNumeros(newValue,fieldname);
                         } else if (fieldname.equalsIgnoreCase("Email")) {
                             validarEmail(newValue,fieldname);
-
+                        }else if(fieldname.equalsIgnoreCase("Dni")){
+                            validarDni(newValue,fieldname);
                         }
+
                         errorLabel.setText("");
                         errorMessage.setText("");
-                    } catch (CampoVacioException  | SoloLetrasException | SoloNumerosException | LetrasyNumerosException | EmailException e) {  // se utiliza el | para capturar mas de una excepcion en el mismo catch
+                    } catch (CampoVacioException  | SoloLetrasException | SoloNumerosException | LetrasyNumerosException | EmailException | DniInvalidoException e) {  // se utiliza el | para capturar mas de una excepcion en el mismo catch
                         errorLabel.setTextFill(Color.RED);
                         if(e instanceof  CampoVacioException) {
                             errorLabel.setText("El campo " + fieldname + " no puede estar vacío.");
@@ -184,6 +188,8 @@ public class registerController extends BaseController{
                             errorLabel.setText("El campo" + fieldname + " debe ser una dirección valida.");
                         }else if(e instanceof EmailException ){
                             errorLabel.setText("El campo " + fieldname + " tiene que poseer un formato valida");
+                        } else if (e instanceof DniInvalidoException) {
+                            errorLabel.setText("El campo " + fieldname + " no es valido");
                         }
                         errorMessage.setText("Error: " + e.getMessage()); // muestra el mensaje de error
                         System.out.println(e.getMessage());
@@ -193,11 +199,40 @@ public class registerController extends BaseController{
     public void agregarListenerValidacion(){
         agregarListener(nameField,nameErrorLabel,"Nombre");
         agregarListener(lastNameField,lastNameErrorLabel,"Apellido");
-        agregarListener(usernameField,usernameErrorLabel,"Usuario");
+        agregarListener(dniField,dniErrorLabel,"Dni");
         agregarListener(passwordField,passwordErrorLabel, "Contraseña");
         agregarListener(adressField,addressErrorLabel,"Direccion");
         agregarListener(phoneNumberField,phoneNumberErrorLabel,"Telefono");
         agregarListener(emailField,emailErrorLabel,"Email");
+    }
+
+
+    private  void showAlertError(String title, String message){   //En caso de que aprete el boton de registro y no se cumpla alguna de las validaciones va aparecer por pantalla un mensaje de error
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private  void irAlLogin(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfaz/login.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) registerAnchorPane.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
+    private  void showAlertConfirmation(String title,String message){  //En caso de que todos los campos sean validos, le mostrara al usuario una alerta de que se registro correctamente y una vez que haga click en aceptar, dicho evento lo mandara al login
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.setOnHidden(evt-> irAlLogin());
+        alert.show();
     }
 
 
@@ -207,33 +242,37 @@ public class registerController extends BaseController{
         try {
             String nombre = nameField.getText();
             String apellido = lastNameField.getText();
-            String usuario = usernameField.getText();
+            String dni = dniField.getText();
             String contrasena = passwordField.getText();
             String direccion = adressField.getText();
             String telefono = phoneNumberField.getText();
             String email = emailField.getText();
-            validarCamposVacios(nombre,apellido,usuario,contrasena,direccion,telefono);
+            validarCamposVacios(nombre,apellido,dni,contrasena,direccion,telefono);
             validarSoloLetras(nombre,"Nombre");
             validarSoloLetras(apellido,"Apellido");               //Si pasa toda estas validaciones crea el cliente.
             validarLetrasYNumeros(direccion,"Direccion");
             validarSoloNumeros(telefono,"Telefono");
             validarEmail(email,"Email");
+            validarDni(dni,"Dni");
 
 
-            Cliente newCliente = new Cliente(nombre,apellido,usuario,contrasena,direccion,telefono,email);
+            Cliente newCliente = new Cliente(nombre,apellido,dni,contrasena,direccion,telefono,email);
             getClienteRepository().add(newCliente);
             Map<String,Cliente> mapaCliente =getClienteRepository().getMapaCliente();
             clienteView.viewClientes(mapaCliente);
 
             errorMessage.setText("");
-            System.out.println("Cliente Registrado exitosamente");
+            showAlertConfirmation("Registro exitoso","El cliente fue registrado correctamente");
+
         }catch ( CampoVacioException e){
             errorMessage.setText("Error: " + e.getMessage());
-            System.err.println("Error:" + e.getMessage()); //System err se utiliza para imprimir mensajes de error
+            System.err.println("Error: " + e.getMessage()); //System err se utiliza para imprimir mensajes de error
+            showAlertError("Error", "Rellene todos los campos obligatorios.");
+        }catch (SoloLetrasException | SoloNumerosException | LetrasyNumerosException | EmailException | DniInvalidoException e) {
+            errorMessage.setText("Error: " + e.getMessage());
+            System.err.println("Error: " + e.getMessage());
+            showAlertError("Error de Validación", e.getMessage());
         }
-
-
-
     }
 
 }

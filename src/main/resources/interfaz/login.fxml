@@ -40,7 +40,7 @@
                         </Label>
                         <TextField fx:id="emailField" layoutX="114.0" layoutY="155.0" promptText="Email" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="270.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="155.0" />
                         <PasswordField fx:id="passwordField" layoutX="114.0" layoutY="226.0" promptText="Password" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" />
-                        <Button fx:id="logginButton" layoutX="117.0" layoutY="322.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="150.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="Loggin" textAlignment="CENTER" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="117.0">
+                        <Button fx:id="logginButton" layoutX="117.0" layoutY="322.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="150.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="Login" textAlignment="CENTER" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="117.0">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>

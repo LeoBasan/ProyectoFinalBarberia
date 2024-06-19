@@ -40,17 +40,17 @@
                         </Label>
                         <TextField fx:id="nameField" layoutX="72.0" layoutY="99.0" prefHeight="25.0" prefWidth="242.0" promptText="Name" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.leftAnchor="72.0" AnchorPane.rightAnchor="72.0" />
                         <TextField fx:id="lastNameField" layoutX="71.0" layoutY="139.0" prefHeight="25.0" prefWidth="242.0" promptText="LastName" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="334.0" />
-                        <TextField fx:id="usernameField" layoutX="71.0" layoutY="179.0" prefHeight="25.0" prefWidth="242.0" promptText="Username" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="294.0" />
+                        <TextField fx:id="emailField" layoutX="71.0" layoutY="179.0" prefHeight="25.0" prefWidth="242.0" promptText="Email" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="294.0" />
                         <TextField fx:id="adressField" layoutX="71.0" layoutY="259.0" prefHeight="25.0" prefWidth="242.0" promptText="Adress" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="214.0" />
                         <TextField fx:id="phoneNumberField" layoutX="71.0" layoutY="299.0" prefHeight="25.0" prefWidth="242.0" promptText="Phone Number" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="174.0" />
                         <PasswordField fx:id="passwordField" layoutX="73.0" layoutY="218.0" prefHeight="23.0" prefWidth="239.0" promptText="Password" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="255.0" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="71.0" AnchorPane.topAnchor="220.0" />
                         <Label fx:id="nameErrorLabel" layoutX="75.0" layoutY="125.0" style="-fx-text-fill: red;" text="" />
                         <Label fx:id="lastNameErrorLabel" layoutX="75.0" layoutY="165.0" style="-fx-text-fill: red;" text="" />
-                        <Label fx:id="usernameErrorLabel" layoutX="75.0" layoutY="205.0" style="-fx-text-fill: red;" text="" />
+                        <Label fx:id="emailErrorLabel" layoutX="75.0" layoutY="205.0" style="-fx-text-fill: red;" text="" />
                         <Label fx:id="passwordErrorLabel" layoutX="75.0" layoutY="244.0" style="-fx-text-fill: red;" text="" />
                         <Label fx:id="addressErrorLabel" layoutX="75.0" layoutY="285.0" style="-fx-text-fill: red;" text="" />
                         <Label fx:id="phoneNumberErrorLabel" layoutX="75.0" layoutY="325.0" style="-fx-text-fill: red;" text="" />
-                        <Label fx:id="emailErrorLabel" layoutX="75.0" layoutY="361.0" style="-fx-text-fill: red;" text="" />
+                        <Label fx:id="dniErrorLabel" layoutX="75.0" layoutY="361.0" style="-fx-text-fill: red;" text="" />
                         <Button fx:id="registerButton" layoutX="72.0" layoutY="382.0" mnemonicParsing="false" onAction="#handleRegister" prefHeight="30.0" prefWidth="242.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="Register" AnchorPane.leftAnchor="72.0" AnchorPane.rightAnchor="70.0">
                            <Label fx:id="errorMessage"  style="-fx-text-fill: red;" text="" />
                            <font>
@@ -66,7 +66,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <TextField fx:id="emailField" layoutX="71.0" layoutY="334.0" prefHeight="25.0" prefWidth="242.0" promptText="Email" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" />
+                        <TextField fx:id="dniField" layoutX="71.0" layoutY="334.0" prefHeight="25.0" prefWidth="242.0" promptText="DNI" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" />
                      </children>
                   </AnchorPane>
               </items>
