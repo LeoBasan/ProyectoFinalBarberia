@@ -1,14 +1,11 @@
 package com.aplicacion.barbero;
 
 import com.aplicacion.abstracta.Persona;
-import com.aplicacion.turno.Turno;
-
-import java.util.List;
 
 public class Barbero extends Persona {
     private Integer aniosExperiencia;
-    public Barbero(String nombre, String apellido, String usuario, String contrasena,Integer aniosExperiencia,String email) {
-        super(nombre, apellido, usuario, contrasena,email);
+    public Barbero(String dni, String nombre, String apellido, String email, String contrasena, Integer aniosExperiencia) {
+        super(dni, nombre, apellido, email, contrasena);
         this.aniosExperiencia = aniosExperiencia;
     }
 

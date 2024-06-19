@@ -78,8 +78,8 @@ public class loginController extends BaseController{
         String usuario= userTextField.getText();
         String password= passwordField.getText();
 
-        Cliente cliente= getClienteRepository().findByUserAndPassword(usuario,password);
-        Barbero barbero= getBarberoRepository().findByUserAndPassword(usuario,password);
+        Cliente cliente= getClienteRepository().findByEmailAndPassword(usuario,password);
+        Barbero barbero= getBarberoRepository().findByEmailAndPassword(usuario,password);
         //Aca deberia validar si se encontraron bien los user y en ese caso mostrar en la interfaz (Leo agregar)
         //Tendria que ver de agregar un cuadrito de mensaje de error o exito en la interfaz
         //Mas facil por ahora muestro en consola

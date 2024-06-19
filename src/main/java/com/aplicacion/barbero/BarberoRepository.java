@@ -20,28 +20,28 @@ public class BarberoRepository implements Irepository<Barbero> {
         return instance;
     }
     private void precargarBarberos(){//Este metodo es para probar, pero cargamos una vez el json y listo se borra
-        listaBarberos.add(new Barbero("Leopoldo","Basanta","Leito","123456",15,"leopoldobasanta@gmail.com"));
-        listaBarberos.add(new Barbero("Alex","Barrientos","Alekei","12345",10,"aalexjuliaan@gmail.com"));
-        listaBarberos.add(new Barbero("Luciano","Dominella","Lucho","1234",30,"luchodominella@gmail.com"));
+        listaBarberos.add(new Barbero("Leopoldo","Basanta","Leito", "leopoldobasanta@gmail.com", "123456",15));
+        listaBarberos.add(new Barbero("Alex","Barrientos","Alekei", "aalexjuliaan@gmail.com", "12345",10));
+        listaBarberos.add(new Barbero("Luciano","Dominella","Lucho", "luchodominella@gmail.com", "1234",30));
     }
     public List<Barbero> getListaBarberos(){
         return listaBarberos;
     }
-    public Barbero findByUserAndPassword(String user, String password){
+    public Barbero findByEmailAndPassword(String email, String password){
         for(Barbero barbero: listaBarberos){
-            if(barbero.getUsuario().equals(user)&& barbero.getContrasena().equals(password)){
+            if(barbero.getEmail().equals(email)&& barbero.getContrasena().equals(password)){
                 return barbero;
             }
         }
         return null;
     }
     @Override
-    public void agregarTurnos(Barbero obj) {
+    public void add(Barbero obj) {
 
     }
 
     @Override
-    public void eliminarTurnos(Integer id) {
+    public void delete(Integer id) {
 
     }
 
@@ -51,7 +51,7 @@ public class BarberoRepository implements Irepository<Barbero> {
     }
 
     @Override
-    public void updateTurno(Barbero obj) {
+    public void update(Barbero obj) {
 
     }
 }

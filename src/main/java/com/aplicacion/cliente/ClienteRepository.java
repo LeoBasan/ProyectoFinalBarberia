@@ -1,13 +1,16 @@
 package com.aplicacion.cliente;
 
 import com.aplicacion.interfaces.Irepository;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class ClienteRepository implements Irepository<Cliente> {
+    private static final String FILE_PATH= "src/main/resources/json/cliente.json";
     private static ClienteRepository instance;//uso esta variable para ver si esta instanciada
     private Map<String,Cliente> mapaCliente;
+    private Gson gson= new Gson();
 
     private ClienteRepository() {
         this.mapaCliente = new HashMap<>();
@@ -23,16 +26,16 @@ public class ClienteRepository implements Irepository<Cliente> {
     }
 
     @Override
-    public void agregarTurnos(Cliente cliente) {
-        if(mapaCliente.containsKey(cliente.getUsuario())){
+    public void add(Cliente cliente) {
+        if(mapaCliente.containsKey(cliente.getDni())){
             //crear una excepcion personalizada para decir que el usuario ya esta registrado
         }else {
-            mapaCliente.put(cliente.getUsuario(), cliente);
+            mapaCliente.put(cliente.getDni(), cliente);
         }
     }
 
     @Override
-    public void eliminarTurnos(Integer id) {
+    public void delete(Integer id) {
 
     }
 
@@ -42,12 +45,12 @@ public class ClienteRepository implements Irepository<Cliente> {
     }
 
     @Override
-    public void updateTurno(Cliente obj) {
+    public void update(Cliente obj) {
 
     }
-    public Cliente findByUserAndPassword(String user, String password){//busco por usuario y contraseña
+    public Cliente findByEmailAndPassword(String mail, String password){//busco por usuario y contraseña
         for(Map.Entry<String, Cliente> entry: mapaCliente.entrySet()){
-            if(entry.getValue().getUsuario().equals(user)&& entry.getValue().getContrasena().equals(password)){
+            if(entry.getValue().getEmail().equals(mail)&& entry.getValue().getContrasena().equals(password)){
                 return entry.getValue();
             }
         }

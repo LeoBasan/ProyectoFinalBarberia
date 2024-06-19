@@ -221,7 +221,7 @@ public class registerController extends BaseController{
 
 
             Cliente newCliente = new Cliente(nombre,apellido,usuario,contrasena,direccion,telefono,email);
-            getClienteRepository().agregarTurnos(newCliente);
+            getClienteRepository().add(newCliente);
             Map<String,Cliente> mapaCliente =getClienteRepository().getMapaCliente();
             clienteView.viewClientes(mapaCliente);
 

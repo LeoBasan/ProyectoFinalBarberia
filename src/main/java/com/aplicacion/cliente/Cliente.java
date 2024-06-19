@@ -10,8 +10,8 @@ public class Cliente extends Persona {
     private String numTelefono;
     private String direccion;
 
-    public Cliente(String nombre, String apellido, String usuario, String contrasena , String numTelefono, String direccion,String email) {
-        super(nombre,apellido,usuario,contrasena,email);
+    public Cliente(String dni, String nombre, String apellido, String email, String contrasena, String numTelefono, String direccion) {
+        super(dni, nombre, apellido, email, contrasena);
         this.numTelefono = numTelefono;
         this.direccion = direccion;
     }

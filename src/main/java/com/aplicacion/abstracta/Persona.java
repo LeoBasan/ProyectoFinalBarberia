@@ -6,33 +6,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Persona {
-        private  Integer id;
-        private static int counter = 0;
-        private String nombre;
-        private String apellido;
-        private String usuario;
-        private String contrasena;
-        private String email;
-        private List<Turno> turnos;
+    private String dni;
+    private String nombre;
+    private String apellido;
+    private String email;
+    private String contrasena;
+    private List<Turno> turnos;
 
-    public Persona(String nombre, String apellido, String usuario, String contrasena,String email) {
-        this.id = ++counter;
+    public Persona(String dni,String nombre, String apellido, String email, String contrasena) {
+        this.dni=dni;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.usuario = usuario;
-        this.contrasena = contrasena;
         this.email = email;
+        this.contrasena = contrasena;
         this.turnos = new ArrayList<>();
     }
-
-    public  Integer getId() {
-        return id;
+    public String getDni() {
+        return dni;
     }
-
-    public  void setId(Integer id) {
-        this.id = id;
+    public void setDni(String dni) {
+        this.dni = dni;
     }
-
     public String getNombre() {
         return nombre;
     }
@@ -47,14 +41,6 @@ public abstract class Persona {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
     }
 
     public String getContrasena() {
