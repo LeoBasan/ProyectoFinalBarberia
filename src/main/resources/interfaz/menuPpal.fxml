@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="stackPaneMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuMainController">
+   <children>
+      <AnchorPane fx:id="anchorPaneMenuMain" prefHeight="640.0" prefWidth="720.0">
+         <children>
+            <BorderPane fx:id="borderPaneMenu" prefHeight="640.0" prefWidth="720.0">
+               <top>
+                  <AnchorPane fx:id="anchorPaneUp" prefHeight="100.0" prefWidth="720.0" styleClass="card" stylesheets="@dashboardDesign.css" BorderPane.alignment="CENTER">
+                     <children>
+                        <ImageView fx:id="companyLogo" fitHeight="65.0" fitWidth="65.0" layoutX="37.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
+                           <image>
+                              <Image url="@../imagenes/companyLogo.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="companyName" layoutX="143.0" layoutY="24.0" styleClass="shadow" stylesheets="@dashboardDesign.css" text="Barber Clean" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="36.0" />
+                           </font>
+                        </Label>
+                        <MenuButton fx:id="profileButton" layoutX="589.0" layoutY="26.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="49.0" styleClass="menu-button" stylesheets="@dashboardDesign.css">
+                          <items>
+                            <MenuItem fx:id="profileOption1" mnemonicParsing="false" styleClass="menu-item" text="Modify Profile" />
+                            <MenuItem fx:id="profileOption2" mnemonicParsing="false" styleClass="menu-item" text="Exit" />
+                          </items>
+                           <graphic>
+                              <ImageView fx:id="profileButtonImage" fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagenes/loggin.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuButton>
+                     </children>
+                  </AnchorPane>
+               </top>
+               <center>
+                  <AnchorPane fx:id="anchorPaneDown" prefHeight="540.0" prefWidth="720.0" stylesheets="@dashboardDesign.css" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane fx:id="menuClientes" styleClass="shadow" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <fx:include fx:id="menuClientesInclude" source="menuClientes.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        </AnchorPane>
+                        <AnchorPane fx:id="elegir_barbero" styleClass="shadow" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <fx:include fx:id="menuBarberoInclude" source="menuBarbero.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        </AnchorPane>
+                        <AnchorPane fx:id="elegir_fecha_y_hora" styleClass="shadow" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <fx:include fx:id="menuTurnosInclude" source="menuTurnos.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </center>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
