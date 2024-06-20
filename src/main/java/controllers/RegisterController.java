@@ -131,7 +131,7 @@ public class RegisterController extends BaseController {
     }
 
     public void validarSoloLetras(String valor, String fieldName) {
-        if (!valor.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]+$")) {  //Es una expresion regular que asegura que la cadena solo contenga letras sin numeros ni caracteres especiales
+        if (!valor.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]+$")) {  //Es una expresion regular que asegura que la cadena solo contenga letras sin numeros ni caracteres especiales ni espacios
             throw new SoloLetrasException("El campo " + fieldName + " solo tiene que tener letras.");
         }
     }
@@ -194,7 +194,7 @@ public class RegisterController extends BaseController {
                 if (e instanceof CampoVacioException) {
                     errorLabel.setText("El campo " + fieldname + " no puede estar vacío.");
                 } else if (e instanceof SoloLetrasException) {
-                    errorLabel.setText("El campo " + fieldname + " solo debe contener letras.");
+                    errorLabel.setText("El campo " + fieldname + " solo debe contener letras (sin espacio).");
                 } else if (e instanceof SoloNumerosException) {
                     errorLabel.setText("el campo " + fieldname + " debe contener 10 dígitos.");
                 } else if (e instanceof LetrasyNumerosException) {
