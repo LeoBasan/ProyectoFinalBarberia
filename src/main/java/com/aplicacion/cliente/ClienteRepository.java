@@ -1,13 +1,18 @@
 package com.aplicacion.cliente;
 
+import com.aplicacion.adapter.LocalDateAdapter;
+import com.aplicacion.adapter.LocalTimeAdapter;
 import com.aplicacion.interfaces.IManejoDeTurnos;
 import com.aplicacion.interfaces.Irepository;
 import com.aplicacion.turno.Turno;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,9 +20,14 @@ public class ClienteRepository implements Irepository<Cliente> , IManejoDeTurnos
     private static final String FILE_PATH= "src/main/resources/json/cliente.json";
     private static ClienteRepository instance;//uso esta variable para ver si esta instanciada
     private Map<String,Cliente> mapaCliente = new HashMap<>();
-    private Gson gson= new Gson();
+    private Gson gson;
 
     private ClienteRepository() {
+        this.gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+                .registerTypeAdapter(LocalTime.class, new LocalTimeAdapter())
+                .create();
+        mapaCliente = new HashMap<>();
         loadCliente();
     }
     public static ClienteRepository getInstance(){//Principio singleton, se instancia una sola vez el repo
