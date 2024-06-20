@@ -94,27 +94,32 @@ public class ClienteRepository implements Irepository<Cliente> , IManejoDeTurnos
     }
 
     @Override
-    public void addTurno(Turno turno) {
-
+    public void addTurno(Turno turno) { ///verificar anteriormente si el barbero tiene disponible el turno.
+        Cliente cliente = this.mapaCliente.get(turno.getCliente().getDni());
+        cliente.getTurnos().add(turno);
+        saveCliente();
     }
 
     @Override
-    public void removeTurno(Turno turno) {
-
+    public void removeTurno(Turno turno) {///todas estas funciones las hacemos teniendo en cuenta que estamos
+                                        // ubicados en la posicion de memoria del cliente por lo que accedemos rapidamente
+           Cliente cliente = this.mapaCliente.get(turno.getCliente().getDni());
+           cliente.getTurnos().remove(turno);
+           saveCliente();
     }
 
     @Override
-    public boolean existenceTurno(Turno turno) { ///devolvemos true si el turno no esta disponible, y false en caso de que lo este.
+    public boolean existenceTurno(Turno turno) { ///devolvemos false si el turno no esta disponible, y true en caso de que lo este.
         Cliente clienteaux = turno.getCliente();
         if(clienteaux == null){
-            return false;
+            return true;
         }
         for(Turno turnoaux : clienteaux.getTurnos()){
             if(turnoaux.getDate().equals(turno.getDate()) && turnoaux.getTime().equals(turno.getTime())){
-                return  true;
+                return  false;
             }
         }
-        return false;
+        return true;
     }
 
     @Override

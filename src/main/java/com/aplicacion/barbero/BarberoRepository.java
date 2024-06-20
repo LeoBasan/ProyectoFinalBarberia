@@ -1,6 +1,9 @@
 package com.aplicacion.barbero;
 
+import com.aplicacion.cliente.Cliente;
+import com.aplicacion.interfaces.IManejoDeTurnos;
 import com.aplicacion.interfaces.Irepository;
+import com.aplicacion.turno.Turno;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -11,7 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class BarberoRepository implements Irepository<Barbero> {
+public class BarberoRepository implements Irepository<Barbero>, IManejoDeTurnos<Turno> {
     private static final String FILE_PATH = "src/main/resources/json/barbero.json";
     private Gson gson = new Gson();
     private static BarberoRepository instance;
@@ -98,5 +101,36 @@ public class BarberoRepository implements Irepository<Barbero> {
         this.setBarberos.remove(obj);
         this.setBarberos.add(obj);
         saveBarbero();
+    }
+
+    @Override
+    public void addTurno(Turno turno) {
+        Barbero barbero = turno.getBarbero();
+        barbero.getTurnos().remove(turno);
+        saveBarbero();
+    }
+
+    @Override
+    public void removeTurno(Turno turno) {
+
+    }
+
+    @Override
+    public boolean existenceTurno(Turno turno) {
+        Barbero barberoaux = turno.getBarbero();
+        if(barberoaux == null){
+            return true;
+        }
+        for(Turno turnoaux : barberoaux.getTurnos()){
+            if(turnoaux.getDate().equals(turno.getDate()) && turnoaux.getTime().equals(turno.getTime())){
+                return  false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void viewlistTurno() {
+
     }
 }
