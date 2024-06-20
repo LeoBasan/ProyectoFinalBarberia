@@ -245,7 +245,6 @@ public class RegisterController extends BaseController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     private void showAlertConfirmation(String title, String message) {  //En caso de que todos los campos sean validos, le mostrara al usuario una alerta de que se registro correctamente y una vez que haga click en aceptar, dicho evento lo mandara al login
