@@ -33,7 +33,7 @@ public class BarberoRepository implements Irepository<Barbero>, IManejoDeTurnos<
         }
         return instance;
     }
-    public void loadBarbero(){
+    private void loadBarbero(){
         try(Reader reader = new FileReader(FILE_PATH)){
             Type setType = new TypeToken<Set<Barbero>>(){}.getType();
             setBarberos = gson.fromJson(reader,setType);
@@ -43,7 +43,7 @@ public class BarberoRepository implements Irepository<Barbero>, IManejoDeTurnos<
             e.printStackTrace();
         }
     }
-    public void saveBarbero(){
+    private void saveBarbero(){
         try(Writer writer = new FileWriter(FILE_PATH)){
             gson.toJson(setBarberos,writer);
         } catch(IOException e){
