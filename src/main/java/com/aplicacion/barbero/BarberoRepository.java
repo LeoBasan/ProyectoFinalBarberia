@@ -1,6 +1,7 @@
 package com.aplicacion.barbero;
 
 import com.aplicacion.cliente.Cliente;
+import com.aplicacion.excepciones.DniInvalidoException;
 import com.aplicacion.interfaces.IManejoDeTurnos;
 import com.aplicacion.interfaces.Irepository;
 import com.aplicacion.turno.Turno;
@@ -95,7 +96,7 @@ public class BarberoRepository implements Irepository<Barbero>, IManejoDeTurnos<
     public void delete(String dni) {
         Barbero aux = findId(dni);
         if (aux==null){
-            ///excepcion de que el barbero no existe
+            throw new DniInvalidoException("Barbero inexistente. ");
         }else{
             this.setBarberos.remove(aux);
         }
@@ -127,26 +128,24 @@ public class BarberoRepository implements Irepository<Barbero>, IManejoDeTurnos<
     }
 
     @Override
-    public void removeTurno(Turno turno) {
-
+    public void removeTurno(Turno turno) { ///antes comprobar si existe
+        Barbero barbero = turno.getBarbero();
+        barbero.getTurnos().remove(turno);
+        saveBarbero();
     }
 
     @Override
-    public boolean existenceTurno(Turno turno) {
+    public boolean existenceTurno(Turno turno) { ///devuelvo true si existe, false si no existe el turno.
         Barbero barberoaux = turno.getBarbero();
         if(barberoaux == null){
-            return true;
+            return false;
         }
         for(Turno turnoaux : barberoaux.getTurnos()){
             if(turnoaux.getDate().equals(turno.getDate()) && turnoaux.getTime().equals(turno.getTime())){
-                return  false;
+                return  true;
             }
         }
-        return true;
+        return false;
     }
 
-    @Override
-    public void viewlistTurno() {
-
-    }
 }

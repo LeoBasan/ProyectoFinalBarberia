@@ -6,5 +6,4 @@ public interface IManejoDeTurnos <T> {
 
     boolean existenceTurno ( T t);
 
-    void viewlistTurno();
 }
