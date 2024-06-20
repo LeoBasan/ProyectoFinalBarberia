@@ -7,7 +7,7 @@ module prueba.pruebaloginccs {
     opens com.aplicacion.cliente to com.google.gson;
     opens com.aplicacion.turno to com.google.gson;
     opens com.aplicacion.interfaces to com.google.gson;
+    opens com.aplicacion.adapter to com.google.gson;
     opens controllers to javafx.fxml;
     exports main;
-    opens com.aplicacion.adapter to com.google.gson;
 }

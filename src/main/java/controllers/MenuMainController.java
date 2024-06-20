@@ -1,5 +1,7 @@
 package controllers;
 
+import com.aplicacion.barbero.Barbero;
+import com.aplicacion.cliente.Cliente;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -10,6 +12,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
 public class MenuMainController extends BaseController {
+    private MenuBarberoController menuBarberoController;
+    private MenuTurnosController menuTurnosController;
+    private MenuClienteController menuClienteController;
+
     //Panel ppal
     @FXML
     private AnchorPane anchorPaneMenuMain;
@@ -56,9 +62,15 @@ public class MenuMainController extends BaseController {
     @FXML
     public void initialize(){
         inicScenes();
+    }
+    public void setCliente(Cliente cliente){
+        super.setCliente(cliente);
         handleMainMenu();
     }
-
+    public void setBarbero(Barbero barbero){
+        super.setBarbero(barbero);
+        handleMainMenu();
+    }
     private void handleMainMenu(){
         if(typeOfUser()){
             showMenuBarbero();
@@ -67,6 +79,7 @@ public class MenuMainController extends BaseController {
         }
     }
     private boolean typeOfUser(){//si viene de cliente retorna true sino false
+        System.out.println(getCliente());
         return getCliente()==null;
     }
     private void inicScenes(){

@@ -89,19 +89,18 @@ public class LoginController extends BaseController{
         alert.setOnHidden(evt ->irAlMenu(usuario));
     }
 
-    public void irAlMenu(Object usuario ){
+    public void irAlMenu(Object usuario){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfaz/menuPpal.fxml"));
             Parent root = loader.load();
             BaseController controller= loader.getController();
-            controller.setClienteRepository(ClienteRepository.getInstance());
-            controller.setBarberoRepository(BarberoRepository.getInstance());
+            controller.setClienteRepository(getClienteRepository());
+            controller.setBarberoRepository(getBarberoRepository());
+
             if (usuario instanceof Cliente) {
                 controller.setCliente((Cliente) usuario);
-                controller.setBarbero(null);
             } else if (usuario instanceof Barbero) {
                 controller.setBarbero((Barbero) usuario);
-                controller.setCliente(null);
             }
             Stage stage = (Stage) anchorPane.getScene().getWindow();
             stage.setScene(new Scene(root));
