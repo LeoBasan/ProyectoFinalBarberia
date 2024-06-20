@@ -30,7 +30,7 @@ public class ClienteRepository implements Irepository<Cliente> , IManejoDeTurnos
         return mapaCliente;
     }
 
-    public void loadCliente(){
+    private void loadCliente(){
         try(Reader reader = new FileReader(FILE_PATH)){
             Type mapType = new TypeToken<Map<String,Cliente>>(){}.getType();
             mapaCliente = gson.fromJson(reader,mapType);
@@ -43,7 +43,7 @@ public class ClienteRepository implements Irepository<Cliente> , IManejoDeTurnos
             e.printStackTrace();
         }
     }
-    public void saveCliente(){
+    private void saveCliente(){
         try(Writer writer = new FileWriter(FILE_PATH)){
             gson.toJson(mapaCliente,writer);
         }catch (IOException e){
