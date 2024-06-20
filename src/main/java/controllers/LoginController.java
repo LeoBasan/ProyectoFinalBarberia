@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class loginController extends BaseController{
+public class LoginController extends BaseController{
 
     @FXML
     private AnchorPane anchorPane;
@@ -63,7 +63,6 @@ public class loginController extends BaseController{
         logginButton.setOnAction(event -> handleLogin());//lo mando a loguearse, y falta despues que avance al siguiente menu
         buttonBack.setOnAction(event->goBack());//lo mando al menu de inicio
     }
-
     private void goBack(){//vuelvo al menu de inicio
         try {
             FXMLLoader loader= new FXMLLoader(getClass().getResource("/interfaz/inicio.fxml"));//vuelvo al inicio interfaz

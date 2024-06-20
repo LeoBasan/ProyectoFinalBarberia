@@ -17,10 +17,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Map;
 
-public class registerController extends BaseController{
-
-
+public class RegisterController extends BaseController{
     private ClienteView clienteView;
+
     @FXML
     private TextField adressField;
 
@@ -38,7 +37,6 @@ public class registerController extends BaseController{
 
     @FXML
     private TextField phoneNumberField;
-
 
     @FXML
     private TextField emailField;
@@ -100,7 +98,6 @@ public class registerController extends BaseController{
         backButton.setOnAction(event->goBack());//volver atras con el boton back
         registerButton.setOnAction(event->handleRegister());//si se registra lo mando al repo
     }
-
     private void goBack(){//metodo para retroceder al menu inicial
         try {
             FXMLLoader loader= new FXMLLoader(getClass().getResource("/interfaz/inicio.fxml"));//vuelvo al fxml del inicio
@@ -111,14 +108,12 @@ public class registerController extends BaseController{
             e.printStackTrace();
         }
     }
-
     //Sobrecarga de metodos
     public void validarCamposVacios(String  valor,String fieldName) {
         if (valor.trim().isEmpty()) {
             throw new CampoVacioException("El campo " + fieldName + " no puede estar vacío");
         }
     }
-
     public void validarCamposVacios(String nombre,String apellido,String dni,String contrasena,String direccion,String telefono){
         if(nombre.trim().isEmpty()) throw new CampoVacioException("error. el campo nombre no puede estar vacío.");
         if(apellido.trim().isEmpty()) throw new CampoVacioException("error. el campo apellido no puede estar vacío.");
@@ -127,43 +122,36 @@ public class registerController extends BaseController{
         if(direccion.trim().isEmpty()) throw new CampoVacioException("error. el campo dirección no puede estar vacío.");
         if(telefono.trim().isEmpty()) throw new CampoVacioException("error. el campo teléfono no puede estar vacío.");
     }
-
     public void validarSoloLetras(String valor,String fieldName){
         if(!valor.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]+$")) {  //Es una expresion regular que asegura que la cadena solo contenga letras sin numeros ni caracteres especiales
             throw new SoloLetrasException("El campo " + fieldName + " solo tiene que tener letras.");
         }
     }
-
     public void validarSoloNumeros(String valor, String fieldName){
         if(!valor.matches("\\d{10}")) { //Es una expresion regular que asegura que la cadena sea de 10 digitos
             throw new SoloNumerosException("El campo " + fieldName + " debe contener 10 dígitos.");
         }
     }
-
     public void validarLetrasYNumeros(String valor, String fieldname){
         if(!valor.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]+\\s\\d{1,5}$") ) {  //verifica que el usuario no pueda poner como primer caracter un espacio, despues que haya letras separado de un unico espacio y despues hasta 5 numeros
             throw new LetrasyNumerosException("El campo " + fieldname + " debe contener letras y números");
         }
     }
-
     public void validarEmail(String valor,String fieldName){
         if (!valor.matches("^[\\w._%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) { //verifica que la cadena de caracteres contiene un "@" y un "."
             throw new EmailException("El campo " + fieldName + " debe poseer un formato valido");
         }
     }
-
     public void validarDni(String valor, String fieldName){
         if(!valor.matches("^\\d{7,8}$")){ //verifica que sean solo o 7 o 8 digitos.
             throw new DniInvalidoException("El campo " + fieldName + " no es valido");
         }
     }
-
     public void validarContrasena(String valor,String fieldName){ //verifica que la contra sea de minimo 6 caracteres
         if(!valor.matches("^.{6,}$")){
             throw new PasswordException("El campo " + fieldName + " debe tener minimo 6 caracteres");
         }
     }
-
     public void agregarListener(TextField textField,Label errorLabel, String fieldname){ //sirve para validar el texto en tiempo real
           textField.textProperty().addListener((observable,oldValue,newValue) -> {;
                     try {
@@ -215,8 +203,6 @@ public class registerController extends BaseController{
         agregarListener(phoneNumberField,phoneNumberErrorLabel,"Telefono");
         agregarListener(emailField,emailErrorLabel,"Email");
     }
-
-
     private  void showAlertError(String title, String message){   //En caso de que aprete el boton de registro y no se cumpla alguna de las validaciones va aparecer por pantalla un mensaje de error
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -224,7 +210,6 @@ public class registerController extends BaseController{
         alert.setContentText(message);
         alert.showAndWait();
     }
-
     private  void irAlLogin(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfaz/login.fxml"));
@@ -244,9 +229,6 @@ public class registerController extends BaseController{
         alert.setOnHidden(evt-> irAlLogin());
         alert.show();
     }
-
-
-
     @FXML
     private void handleRegister(){ ///aca hacer validaciones con listener en tiempo real
         try {
@@ -285,5 +267,4 @@ public class registerController extends BaseController{
             showAlertError("Error de Validación", e.getMessage());
         }
     }
-
 }

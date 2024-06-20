@@ -1,7 +1,6 @@
 package controllers;
 
 import com.aplicacion.barbero.BarberoRepository;
-import com.aplicacion.cliente.Cliente;
 import com.aplicacion.cliente.ClienteRepository;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,7 +16,7 @@ import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 
-public class inicioController {
+public class InicioController {
 
     @FXML
     private AnchorPane anchorPane;

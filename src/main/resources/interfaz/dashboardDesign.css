@@ -116,11 +116,14 @@ and open the template in the editor.
     -fx-background-radius:8px;
 }
 
-.card{
+.card{/*Se aclara hacia la derecha*/
     -fx-background-color:linear-gradient(to right, #272b3f, #256b51);
     -fx-background-radius:5px;
 }
-
+.cardToleft{/*Se aclara hacia la izquierda*/
+    -fx-background-color:linear-gradient(to left, #272b3f, #256b51);
+    -fx-background-radius:5px;
+}
 .table-view {
     -fx-background-color: transparent;
     -fx-border-color: linear-gradient(to bottom right, #272b3f, #256b51);
@@ -247,6 +250,43 @@ and open the template in the editor.
 .add-btn-center:hover{
     -fx-background-color:#3357a4;
 }
+.menu-button{/*Estilo del boton del menu ppal*/
+    -fx-background-color: #272b3f;
+    -fx-background-radius: 8px;
+    -fx-padding: 5;
+    -fx-border-color: transparent;
+    -fx-border-radius: 8px;
+}
+.menu-button:hover{
+    -fx-background-color: #3357a4;
+}
+.menu-button .arrow {/*Le doy forma a la flecha del menu*/
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-shape: "M 0 0 L 5 0 L 2.5 3 Z"; /* Forma de la flecha */
+    -fx-scale-x: 0.8;
+    -fx-scale-y: 0.8;
+}
+.menu-item{/*Configurar el menu desplegable que usa el diseño de menu-button*/
+    -fx-background-color: #272b3f;
+        -fx-background-radius: 8px;
+        -fx-text-fill: #fff;
+        -fx-font-size: 14px;
+        -fx-font-family: "Tahoma";
+        -fx-padding: 8px 10px; /* Espaciado interno */
+}
+.menu-item:hover{/*Resaltar color al pasar cursor*/
+    -fx-background-color: #3357a4;
+}
+.menu-item.label{
+    -fx-text-fill: #fff;
+    -fx-alignment: center; /* Alinea el texto al centro */
+}
+.context-menu{/* La parte de atras del menu desplegable*/
+    -fx-background-color: #272b3f; /* Mismo color de fondo que los items */
+    -fx-background-radius: 8px; /* Redondear el borde del menú */
+    -fx-padding: 5px; /* Añadir padding para separarlo del borde */
+}
 .izquierda-btn {
     -fx-text-fill: #fff; /* Establece el color del texto del botón */
     -fx-font-size: 14px; /* Establece el tamaño de la fuente del texto del botón */
@@ -285,20 +325,82 @@ and open the template in the editor.
 .delete-btn:hover{
     -fx-background-color:#ae1d46;
 }
-/* Establece el color inicial del DatePicker */
+/* Configurar datePicker*/
 .date-picker {
-    -fx-background-color: #fff; /* Cambia este color según tus preferencias */
-    -fx-border-width: 0 0 1 0; /* Establece el ancho del borde a 1 en la parte inferior y 0 en el resto */
-    -fx-border-color: grey; /* Color del borde inicial */
+    -fx-background-color: #272b3f;
+    -fx-border-color: black;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
 }
-
-/* Cambia el color cuando el DatePicker está enfocado */
+.date-picker:hover {
+    -fx-border-color: #093D1E;
+}
 .date-picker:focused {
-    -fx-background-color: #a0a0a0; /* Cambia este color según tus preferencias */
-    -fx-border-width: 0 0 2 0; /* Establece el ancho del borde a 2 en la parte inferior y 0 en el resto */
-    -fx-border-color: #272b3f; /* Color del borde cuando el DatePicker está enfocado */
+    -fx-border-color: #4682b4; /* Steel Blue */
+    -fx-border-width: 2;
+}
+.date-picker .arrow-button {
+    -fx-background-color: transparent;
 }
 
+.date-picker .arrow-button .arrow {
+    -fx-background-color: #4682b4; /* Steel Blue */
+}
+
+.date-picker .text-field {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+}
+
+.date-picker .text-field:focused {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+}
+
+.date-picker-popup .month-year-pane {
+    -fx-background-color: #4682b4; /* Steel Blue */
+    -fx-text-fill: white;
+}
+
+.date-picker-popup .day-cell {
+    -fx-background-color: white;
+    -fx-border-color: lightgrey;
+}
+
+.date-picker-popup .day-cell:filled:hover {
+    -fx-background-color: #ff6347; /* Tomato */
+}
+
+.date-picker-popup .day-cell:selected {
+    -fx-background-color: #4682b4; /* Steel Blue */
+    -fx-text-fill: white;
+}
+.styled-button {
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-background-color: #272b3f;
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0.5, 0.0, 0.0);
+    -fx-padding: 5;
+}
+.styled-button:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 15, 0.5, 0.0, -5.0);
+    -fx-cursor: hand;
+}
+.styled-button:pressed {/*Efecto al presionar*/
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 15, 0.5, 0.0, 5.0);
+    -fx-background-color: #093D1E;
+}
+.styled-button:selected {/*Efecto al seleccionar*/
+    -fx-background-color: #093D1E;
+}
+.styled-image{/*Imagen en el boton integrada*/
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+/*aca termina*/
 .clear-btn{
     -fx-background-color:#753566;
     -fx-background-radius:8px;
