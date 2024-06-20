@@ -141,8 +141,8 @@ public class registerController extends BaseController{
     }
 
     public void validarLetrasYNumeros(String valor, String fieldname){
-        if(!valor.matches(".*[a-zA-Z]+\\s+\\d+.*") ) {  //verifica que despues de escribir letras haya obligatoriamente un espacio y despues numeros.
-            throw new LetrasyNumerosException("El campo " + fieldname + " debe contener letras y numeros");
+        if(!valor.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]+\\s\\d{1,5}$") ) {  //verifica que el usuario no pueda poner como primer caracter un espacio, despues que haya letras separado de un unico espacio y despues hasta 5 numeros
+            throw new LetrasyNumerosException("El campo " + fieldname + " debe contener letras y números");
         }
     }
 
@@ -155,6 +155,12 @@ public class registerController extends BaseController{
     public void validarDni(String valor, String fieldName){
         if(!valor.matches("^\\d{7,8}$")){ //verifica que sean solo o 7 o 8 digitos.
             throw new DniInvalidoException("El campo " + fieldName + " no es valido");
+        }
+    }
+
+    public void validarContrasena(String valor,String fieldName){ //verifica que la contra sea de minimo 6 caracteres
+        if(!valor.matches("^.{6,}$")){
+            throw new PasswordException("El campo " + fieldName + " debe tener minimo 6 caracteres");
         }
     }
 
@@ -172,24 +178,28 @@ public class registerController extends BaseController{
                             validarEmail(newValue,fieldname);
                         }else if(fieldname.equalsIgnoreCase("Dni")){
                             validarDni(newValue,fieldname);
+                        }else if(fieldname.equalsIgnoreCase("Contraseña")){
+                            validarContrasena(newValue,fieldname);
                         }
 
                         errorLabel.setText("");
                         errorMessage.setText("");
-                    } catch (CampoVacioException  | SoloLetrasException | SoloNumerosException | LetrasyNumerosException | EmailException | DniInvalidoException e) {  // se utiliza el | para capturar mas de una excepcion en el mismo catch
+                    } catch (CampoVacioException  | SoloLetrasException | SoloNumerosException | LetrasyNumerosException | EmailException | DniInvalidoException | PasswordException e) {  // se utiliza el | para capturar mas de una excepcion en el mismo catch
                         errorLabel.setTextFill(Color.RED);
                         if(e instanceof  CampoVacioException) {
                             errorLabel.setText("El campo " + fieldname + " no puede estar vacío.");
                         } else if( e instanceof SoloLetrasException ){
                             errorLabel.setText("El campo " + fieldname + " solo debe contener letras.");
                         }else if(e instanceof SoloNumerosException){
-                            errorLabel.setText("el campo" + fieldname + " debe contener 10 dígitos.");
+                            errorLabel.setText("el campo " + fieldname + " debe contener 10 dígitos.");
                         }else if ( e instanceof  LetrasyNumerosException){
-                            errorLabel.setText("El campo" + fieldname + " debe ser una dirección valida.");
+                            errorLabel.setText("El campo " + fieldname + " debe ser una dirección valida.");
                         }else if(e instanceof EmailException ){
                             errorLabel.setText("El campo " + fieldname + " tiene que poseer un formato valida");
                         } else if (e instanceof DniInvalidoException) {
                             errorLabel.setText("El campo " + fieldname + " no es valido");
+                        }else if ( e instanceof PasswordException ){
+                            errorLabel.setText("El campo " + fieldname + " debe poseer minimo 6 caracteres");
                         }
                         errorMessage.setText("Error: " + e.getMessage()); // muestra el mensaje de error
                         System.out.println(e.getMessage());
@@ -240,23 +250,24 @@ public class registerController extends BaseController{
     @FXML
     private void handleRegister(){ ///aca hacer validaciones con listener en tiempo real
         try {
-            String nombre = nameField.getText();
-            String apellido = lastNameField.getText();
-            String dni = dniField.getText();
+            String nombre = nameField.getText().trim();
+            String apellido = lastNameField.getText().trim();
+            String dni = dniField.getText().trim();
             String contrasena = passwordField.getText();
             String direccion = adressField.getText();
-            String telefono = phoneNumberField.getText();
-            String email = emailField.getText();
+            String telefono = phoneNumberField.getText().trim();
+            String email = emailField.getText().trim();
             validarCamposVacios(nombre,apellido,dni,contrasena,direccion,telefono);
             validarSoloLetras(nombre,"Nombre");
-            validarSoloLetras(apellido,"Apellido");               //Si pasa toda estas validaciones crea el cliente.
+            validarSoloLetras(apellido,"Apellido");
+            validarEmail(email,"Email");//Si pasa toda estas validaciones crea el cliente.
+            validarContrasena(contrasena,"Contraseña");
             validarLetrasYNumeros(direccion,"Direccion");
             validarSoloNumeros(telefono,"Telefono");
-            validarEmail(email,"Email");
             validarDni(dni,"Dni");
 
 
-            Cliente newCliente = new Cliente(nombre,apellido,dni,contrasena,direccion,telefono,email);
+            Cliente newCliente = new Cliente(dni,nombre,apellido,email,contrasena,telefono,direccion);
             getClienteRepository().add(newCliente);
             Map<String,Cliente> mapaCliente =getClienteRepository().getMapaCliente();
             clienteView.viewClientes(mapaCliente);
@@ -268,7 +279,7 @@ public class registerController extends BaseController{
             errorMessage.setText("Error: " + e.getMessage());
             System.err.println("Error: " + e.getMessage()); //System err se utiliza para imprimir mensajes de error
             showAlertError("Error", "Rellene todos los campos obligatorios.");
-        }catch (SoloLetrasException | SoloNumerosException | LetrasyNumerosException | EmailException | DniInvalidoException e) {
+        }catch (SoloLetrasException | SoloNumerosException | LetrasyNumerosException | EmailException | DniInvalidoException | PasswordException e) {
             errorMessage.setText("Error: " + e.getMessage());
             System.err.println("Error: " + e.getMessage());
             showAlertError("Error de Validación", e.getMessage());
