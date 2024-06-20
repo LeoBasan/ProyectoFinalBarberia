@@ -1,6 +1,8 @@
 package controllers;
 
+import com.aplicacion.barbero.BarberoRepository;
 import com.aplicacion.cliente.Cliente;
+import com.aplicacion.cliente.ClienteRepository;
 import com.aplicacion.cliente.ClienteView;
 import com.aplicacion.excepciones.*;
 import javafx.fxml.FXML;
@@ -235,6 +237,9 @@ public class RegisterController extends BaseController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfaz/login.fxml"));
             Parent root = loader.load();
+            BaseController controller= loader.getController();
+            controller.setClienteRepository(ClienteRepository.getInstance());
+            controller.setBarberoRepository(BarberoRepository.getInstance());
             Stage stage = (Stage) registerAnchorPane.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException e) {
