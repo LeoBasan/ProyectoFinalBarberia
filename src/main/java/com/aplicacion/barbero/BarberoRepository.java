@@ -123,7 +123,7 @@ public class BarberoRepository implements Irepository<Barbero>, IManejoDeTurnos<
     @Override
     public void addTurno(Turno turno) {
         Barbero barbero = turno.getBarbero();
-        barbero.getTurnos().remove(turno);
+        barbero.getTurnos().add(turno);
         saveBarbero();
     }
 
