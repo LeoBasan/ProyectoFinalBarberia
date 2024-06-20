@@ -6,27 +6,28 @@ import com.aplicacion.cliente.Cliente;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.UUID;
 
 public class Turno {
-    private Integer id;
+    private static String id;
     private Cliente cliente;
     private Barbero barbero;
     private LocalDate date;
     private LocalTime time;
 
-    public Turno(Integer id, Cliente cliente, Barbero barbero, LocalDate  date, LocalTime time) {
-        this.id = id;
+    public Turno(String id, Cliente cliente, Barbero barbero, LocalDate  date, LocalTime time) {
+        this.id = UUID.randomUUID().toString();
         this.cliente = cliente;
         this.barbero = barbero;
         this.date = date;
         this.time = time;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
