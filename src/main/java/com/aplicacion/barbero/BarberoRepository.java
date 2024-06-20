@@ -5,26 +5,36 @@ import com.aplicacion.interfaces.IManejoDeTurnos;
 import com.aplicacion.interfaces.Irepository;
 import com.aplicacion.turno.Turno;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import com.aplicacion.adapter.LocalDateAdapter;
+import com.aplicacion.adapter.LocalTimeAdapter;
 
 public class BarberoRepository implements Irepository<Barbero>, IManejoDeTurnos<Turno> {
     private static final String FILE_PATH = "src/main/resources/json/barbero.json";
-    private Gson gson = new Gson();
+    private  Gson gson;
     private static BarberoRepository instance;
-    private Set<Barbero> setBarberos = new HashSet<>();
+    private Set<Barbero> setBarberos;
 
     private BarberoRepository(){
-        loadBarbero();
-        if(this.setBarberos.isEmpty()){
+        this.gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+                .registerTypeAdapter(LocalTime.class, new LocalTimeAdapter())
+                .create();
+        setBarberos = new HashSet<>();
+        if(setBarberos.isEmpty()) {
             precargarBarberos();
         }
+        loadBarbero();
 
     }
     public static BarberoRepository getInstance(){
@@ -33,10 +43,13 @@ public class BarberoRepository implements Irepository<Barbero>, IManejoDeTurnos<
         }
         return instance;
     }
-    private void loadBarbero(){
+   private void loadBarbero(){
         try(Reader reader = new FileReader(FILE_PATH)){
             Type setType = new TypeToken<Set<Barbero>>(){}.getType();
             setBarberos = gson.fromJson(reader,setType);
+            if(setBarberos == null){
+                setBarberos = new HashSet<>();
+            }
         }catch (FileNotFoundException e ){
                 setBarberos= new HashSet<>();
         }catch (IOException e){
@@ -51,6 +64,9 @@ public class BarberoRepository implements Irepository<Barbero>, IManejoDeTurnos<
         }
     }
     private void precargarBarberos(){//Este metodo es para probar, pero cargamos una vez el json y listo se borra
+        if(setBarberos == null) {
+            System.out.println("no funca");
+        }
         setBarberos.add(new Barbero("44783789","Leopoldo","Basanta", "leopoldobasanta@gmail.com", "123456",15));
         setBarberos.add(new Barbero("44783654","Alex","Barrientos", "aalexjuliaan@gmail.com", "12345",10));
         setBarberos.add(new Barbero("44783098","Luciano","Dominella", "luchodominella@gmail.com", "1234",30));
@@ -72,7 +88,7 @@ public class BarberoRepository implements Irepository<Barbero>, IManejoDeTurnos<
     public void add(Barbero obj) {
         this.setBarberos.add(obj);
         /// en caso de que necesitemos cargar un barbero lo haremos manualmente.
-        saveBarbero();
+       saveBarbero();
     }
 
     @Override
@@ -100,7 +116,7 @@ public class BarberoRepository implements Irepository<Barbero>, IManejoDeTurnos<
     public void update(Barbero obj) {
         this.setBarberos.remove(obj);
         this.setBarberos.add(obj);
-        saveBarbero();
+      saveBarbero();
     }
 
     @Override

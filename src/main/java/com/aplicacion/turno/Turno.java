@@ -14,7 +14,7 @@ public class Turno {
     private LocalDate date;
     private LocalTime time;
 
-    public Turno(Integer id, Cliente cliente, Barbero barbero, LocalDate date, LocalTime time) {
+    public Turno(Integer id, Cliente cliente, Barbero barbero, LocalDate  date, LocalTime time) {
         this.id = id;
         this.cliente = cliente;
         this.barbero = barbero;
