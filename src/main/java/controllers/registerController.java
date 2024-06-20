@@ -146,7 +146,7 @@ public class registerController extends BaseController{
         }
     }
 
-    public void validarEmail(String valor,String fieldName){
+    public void validarEmail(String valor,String fieldName){ //me faltaria verificar si el email existe dentro del mapa Usuario para evitar que se repita
         if (!valor.matches("^[\\w._%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) { //verifica que la cadena de caracteres contiene un "@" y un "."
             throw new EmailException("El campo " + fieldName + " debe poseer un formato valido");
         }
