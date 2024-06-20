@@ -97,12 +97,15 @@ public class LoginController extends BaseController{
             controller.setClienteRepository(ClienteRepository.getInstance());
             controller.setBarberoRepository(BarberoRepository.getInstance());
             if (usuario instanceof Cliente) {
-             controller.setCliente((Cliente) usuario);
+                controller.setCliente((Cliente) usuario);
+                controller.setBarbero(null);
             } else if (usuario instanceof Barbero) {
                 controller.setBarbero((Barbero) usuario);
+                controller.setCliente(null);
             }
             Stage stage = (Stage) anchorPane.getScene().getWindow();
             stage.setScene(new Scene(root));
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

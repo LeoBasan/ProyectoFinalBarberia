@@ -10,7 +10,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
 public class MenuMainController extends BaseController {
-
     //Panel ppal
     @FXML
     private AnchorPane anchorPaneMenuMain;
@@ -46,13 +45,48 @@ public class MenuMainController extends BaseController {
     private AnchorPane anchorPaneDown;
     //Paneles de escenas que voy a manejar abajo
     @FXML
-    private AnchorPane elegir_barbero;
+    private AnchorPane menuClientes;
 
     @FXML
-    private AnchorPane elegir_fecha_y_hora;
+    private AnchorPane menuBarbero;
 
     @FXML
-    private AnchorPane historial_cliente;
+    private AnchorPane menuTurnos;
 
+    @FXML
+    public void initialize(){
+        inicScenes();
+        handleMainMenu();
+    }
 
+    private void handleMainMenu(){
+        if(typeOfUser()){
+            showMenuBarbero();
+        } else {
+            showMenuClientes();
+        }
+    }
+    private boolean typeOfUser(){//si viene de cliente retorna true sino false
+        return getCliente()==null;
+    }
+    private void inicScenes(){
+        menuClientes.setVisible(false);
+        menuBarbero.setVisible(false);
+        menuTurnos.setVisible(false);
+    }
+    private void showMenuClientes(){
+        menuBarbero.setVisible(false);
+        menuTurnos.setVisible(false);
+        menuClientes.setVisible(true);
+    }
+    private void showMenuBarbero(){
+        menuTurnos.setVisible(false);
+        menuClientes.setVisible(false);
+        menuBarbero.setVisible(true);
+    }
+    private void showMenuTurnos(){
+        menuBarbero.setVisible(false);
+        menuClientes.setVisible(false);
+        menuTurnos.setVisible(true);
+    }
 }
