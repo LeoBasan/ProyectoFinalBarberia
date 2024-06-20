@@ -202,7 +202,7 @@ public class registerController extends BaseController{
                             errorLabel.setText("El campo " + fieldname + " debe poseer minimo 6 caracteres");
                         }
                         errorMessage.setText("Error: " + e.getMessage()); // muestra el mensaje de error
-                        System.out.println(e.getMessage());
+
                     }
             });
     }
