@@ -83,8 +83,6 @@ public class MenuMainController extends BaseController {
         addTurnoButton.setOnAction(this::switchForm);
         modifyProfileButton.setOnAction(this::switchForm);
         logOutButton.setOnAction(event -> handleLogout());
-        //actualizo la botonera dependiendo el inicio
-        updateUIBasedOnUser();
     }
     public void switchForm(ActionEvent actionEvent){
         //Obtengo el boton que disparo el evento
@@ -107,9 +105,11 @@ public class MenuMainController extends BaseController {
     }
     public void setCliente(Cliente cliente){
         super.setCliente(cliente);
+        updateUIBasedOnUser();
     }
     public void setBarbero(Barbero barbero){
         super.setBarbero(barbero);
+        updateUIBasedOnUser();
     }
     private boolean typeOfUser(){//si viene de cliente retorna true sino false
         return getCliente()!=null;
