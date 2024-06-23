@@ -52,25 +52,18 @@ public class InicioController {
         closeButton.setOnAction(event->closeApplication());//boton close sale del programa
     }
     private void openLoginMenu(){
-        loadScene("/interfaz/login.fxml",ClienteRepository.getInstance(), BarberoRepository.getInstance());//menu login necesita el cliente y los barberos
+        loadScene("/interfaz/login.fxml");//menu login necesita el cliente y los barberos
     }
     private void openRegisterMenu(){
-        loadScene("/interfaz/register.fxml", ClienteRepository.getInstance(),null);//menu registro solo usa el repo de cliente
+        loadScene("/interfaz/register.fxml");//menu registro solo usa el repo de cliente
     }
     private void closeApplication(){
         Platform.exit();//sale del programa
     }
-    private void loadScene(String fxmlPath, ClienteRepository clienteRepository, BarberoRepository barberoRepository){
+    private void loadScene(String fxmlPath){
         try{
             FXMLLoader loader= new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root= loader.load();
-            //traigo el controller de ambos repos
-            BaseController controller= loader.getController();
-            //seteo el repo de cliente
-            controller.setClienteRepository(clienteRepository);
-            if(barberoRepository!=null){//y si traigo el login, tambien seteo el de barbero
-                controller.setBarberoRepository(barberoRepository);
-            }
             //avanzo a la escena elegida
             Stage stage=(Stage) stackPane.getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -78,6 +71,4 @@ public class InicioController {
             e.printStackTrace();
         }
     }
-
-
 }

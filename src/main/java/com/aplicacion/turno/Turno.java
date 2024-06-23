@@ -4,21 +4,20 @@ import com.aplicacion.barbero.Barbero;
 import com.aplicacion.cliente.Cliente;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.UUID;
 
 public class Turno {
-    private static String id;
-    private Cliente cliente;
-    private Barbero barbero;
+    private String id;
+    private String dniCliente;
+    private String dniBarbero;
     private LocalDate date;
     private LocalTime time;
 
-    public Turno(String id, Cliente cliente, Barbero barbero, LocalDate  date, LocalTime time) {
+    public Turno(String dniCliente, String dniBarbero, LocalDate date, LocalTime time) {
         this.id = UUID.randomUUID().toString();
-        this.cliente = cliente;
-        this.barbero = barbero;
+        this.dniCliente = dniCliente;
+        this.dniBarbero = dniBarbero;
         this.date = date;
         this.time = time;
     }
@@ -31,20 +30,20 @@ public class Turno {
         this.id = id;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public String getDniCliente() {
+        return dniCliente;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setDniCliente(String dniCliente) {
+        this.dniCliente = dniCliente;
     }
 
-    public Barbero getBarbero() {
-        return barbero;
+    public String getDniBarbero() {
+        return dniBarbero;
     }
 
-    public void setBarbero(Barbero barbero) {
-        this.barbero = barbero;
+    public void setDniBarbero(String dniBarbero) {
+        this.dniBarbero = dniBarbero;
     }
 
     public LocalDate getDate() {

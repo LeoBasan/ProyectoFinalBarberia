@@ -8,13 +8,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="tableroMenuTurno" prefHeight="540.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuTurnosController">
+<AnchorPane fx:id="tableroMenuTurno" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuTurnosController">
    <children>
-      <SplitPane fx:id="splitPaneTurnos" dividerPositions="0.45" prefHeight="540.0" prefWidth="720.0">
+      <SplitPane fx:id="splitPaneTurnos" dividerPositions="0.33" prefHeight="600.0" prefWidth="600.0">
         <items>
-          <AnchorPane fx:id="paneImageBarberos" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="card" stylesheets="@dashboardDesign.css">
+          <AnchorPane fx:id="paneImageBarberos" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" stylesheets="@dashboardDesign.css">
                <children>
-                  <Button fx:id="luchoButton" layoutX="50.0" layoutY="14.0" mnemonicParsing="false" styleClass="styled-button" stylesheets="@dashboardDesign.css" AnchorPane.topAnchor="14.0">
+                  <Button fx:id="luchoButton" layoutX="14.0" layoutY="21.0" mnemonicParsing="false" styleClass="styled-button" stylesheets="@dashboardDesign.css" AnchorPane.topAnchor="20.0" onAction="#handleBarberButtonAction">
                      <graphic>
                         <ImageView fx:id="barberoLuchoImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="styled-image">
                            <image>
@@ -23,7 +23,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="leoButton" layoutX="50.0" layoutY="187.0" mnemonicParsing="false" styleClass="styled-button" stylesheets="@dashboardDesign.css">
+                  <Button fx:id="leoButton" layoutX="14.0" layoutY="217.0" mnemonicParsing="false" styleClass="styled-button" stylesheets="@dashboardDesign.css" onAction="#handleBarberButtonAction">
                      <graphic>
                         <ImageView fx:id="barberoLeoImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="styled-image">
                            <image>
@@ -32,9 +32,9 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="alexButton" layoutX="50.0" layoutY="360.0" mnemonicParsing="false" styleClass="styled-button" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="14.0">
+                  <Button fx:id="alexButton" layoutX="14.0" layoutY="413.0" mnemonicParsing="false" styleClass="styled-button" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="20.0" onAction="#handleBarberButtonAction">
                      <graphic>
-                        <ImageView fx:id="barberoLuchoImage1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="styled-image">
+                        <ImageView fx:id="barberoAlexImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="styled-image">
                            <image>
                               <Image url="@../imagenes/barberoAlex.jpg" />
                            </image>
@@ -43,10 +43,10 @@
                   </Button>
                </children>
             </AnchorPane>
-          <AnchorPane fx:id="paneCalendarTime" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="cardToleft" stylesheets="@dashboardDesign.css">
+          <AnchorPane fx:id="paneCalendarTime" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" stylesheets="@dashboardDesign.css">
                <children>
                   <DatePicker fx:id="datePickerTurno" layoutX="84.0" layoutY="30.0" prefHeight="40.0" prefWidth="225.0" promptText="Fecha Turno" styleClass="date-picker" stylesheets="@dashboardDesign.css" />
-                  <Button fx:id="nineHsButton" layoutX="14.0" layoutY="261.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="109.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="9:00">
+                  <Button fx:id="nineHsButton" layoutX="14.0" layoutY="261.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="109.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="9:00" onAction="#handleTimeButtonAction">
                      <graphic>
                         <ImageView fitHeight="29.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -58,7 +58,7 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="tenHsButton" layoutX="142.0" layoutY="261.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="109.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="10:00">
+                  <Button fx:id="tenHsButton" layoutX="142.0" layoutY="261.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="109.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="10:00" onAction="#handleTimeButtonAction">
                      <graphic>
                         <ImageView fitHeight="29.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -70,7 +70,7 @@
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="elevenHsButton" layoutX="269.0" layoutY="261.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="109.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="11:00">
+                  <Button fx:id="elevenHsButton" layoutX="269.0" layoutY="261.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="109.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="11:00" onAction="#handleTimeButtonAction">
                      <graphic>
                         <ImageView fitHeight="29.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -82,7 +82,7 @@
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="twelveHsButton" layoutX="14.0" layoutY="315.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="109.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="12:00">
+                  <Button fx:id="twelveHsButton" layoutX="14.0" layoutY="315.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="109.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="12:00" onAction="#handleTimeButtonAction">
                      <graphic>
                         <ImageView fitHeight="29.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -94,7 +94,7 @@
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="thirteenHsButton" layoutX="142.0" layoutY="315.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="109.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="13:00">
+                  <Button fx:id="thirteenHsButton" layoutX="142.0" layoutY="315.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="109.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="13:00" onAction="#handleTimeButtonAction">
                      <graphic>
                         <ImageView fitHeight="29.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -106,7 +106,7 @@
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="fourteenHsButton" layoutX="269.0" layoutY="315.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="109.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="14:00">
+                  <Button fx:id="fourteenHsButton" layoutX="269.0" layoutY="315.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="109.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="14:00" onAction="#handleTimeButtonAction">
                      <graphic>
                         <ImageView fitHeight="29.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -118,7 +118,7 @@
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="fifteenHsButton" layoutX="69.0" layoutY="370.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="109.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="15:00">
+                  <Button fx:id="fifteenHsButton" layoutX="69.0" layoutY="370.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="109.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="15:00" onAction="#handleTimeButtonAction">
                      <graphic>
                         <ImageView fitHeight="29.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -130,7 +130,7 @@
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="sixteenHsButton" layoutX="215.0" layoutY="370.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="109.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="16:00">
+                  <Button fx:id="sixteenHsButton" layoutX="215.0" layoutY="370.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="109.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="16:00" onAction="#handleTimeButtonAction">
                      <graphic>
                         <ImageView fitHeight="29.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -142,7 +142,7 @@
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="confirmButton" layoutX="56.0" layoutY="455.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="136.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="Confirmar">
+                  <Button fx:id="confirmButton" layoutX="129.0" layoutY="475.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="136.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="Confirmar" onAction="#handleConfirmButton">
                      <graphic>
                         <ImageView fitHeight="29.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -153,18 +153,6 @@
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
-                  </Button>
-                  <Button fx:id="backButton" layoutX="202.0" layoutY="455.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="136.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="Volver">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="23.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../imagenes/close.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
                   </Button>
                </children></AnchorPane>
         </items>

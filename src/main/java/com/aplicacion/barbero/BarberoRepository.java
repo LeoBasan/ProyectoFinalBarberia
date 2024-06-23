@@ -20,7 +20,7 @@ import java.util.Set;
 import com.aplicacion.adapter.LocalDateAdapter;
 import com.aplicacion.adapter.LocalTimeAdapter;
 
-public class BarberoRepository implements Irepository<Barbero>, IManejoDeTurnos<Turno> {
+public class BarberoRepository implements Irepository<Barbero>{
     private static final String FILE_PATH = "src/main/resources/json/barbero.json";
     private  Gson gson;
     private static BarberoRepository instance;
@@ -32,11 +32,7 @@ public class BarberoRepository implements Irepository<Barbero>, IManejoDeTurnos<
                 .registerTypeAdapter(LocalTime.class, new LocalTimeAdapter())
                 .create();
         setBarberos = new HashSet<>();
-        if(setBarberos.isEmpty()) {
-            precargarBarberos();
-        }
         loadBarbero();
-
     }
     public static BarberoRepository getInstance(){
         if(instance==null){
@@ -119,24 +115,24 @@ public class BarberoRepository implements Irepository<Barbero>, IManejoDeTurnos<
         this.setBarberos.add(obj);
       saveBarbero();
     }
-
+    /*
     @Override
     public void addTurno(Turno turno) {
-        Barbero barbero = turno.getBarbero();
+        Barbero barbero = findId(turno.getDniBarbero());
         barbero.getTurnos().add(turno);
         saveBarbero();
     }
 
     @Override
     public void removeTurno(Turno turno) { ///antes comprobar si existe
-        Barbero barbero = turno.getBarbero();
+        Barbero barbero = findId(turno.getDniBarbero());
         barbero.getTurnos().remove(turno);
         saveBarbero();
     }
 
     @Override
     public boolean existenceTurno(Turno turno) { ///devuelvo true si existe, false si no existe el turno.
-        Barbero barberoaux = turno.getBarbero();
+        Barbero barberoaux = findId(turno.getDniBarbero());
         if(barberoaux == null){
             return false;
         }
@@ -146,6 +142,6 @@ public class BarberoRepository implements Irepository<Barbero>, IManejoDeTurnos<
             }
         }
         return false;
-    }
+    }*/
 
 }

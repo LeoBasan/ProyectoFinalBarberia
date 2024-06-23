@@ -5,9 +5,12 @@ module prueba.pruebaloginccs {
     opens com.aplicacion.abstracta to com.google.gson;
     opens com.aplicacion.barbero to com.google.gson;
     opens com.aplicacion.cliente to com.google.gson;
-    opens com.aplicacion.turno to com.google.gson;
+    opens com.aplicacion.turno to com.google.gson, javafx.base;
     opens com.aplicacion.interfaces to com.google.gson;
     opens com.aplicacion.adapter to com.google.gson;
+    opens com.aplicacion.login to com.google.gson;
+
+
     opens controllers to javafx.fxml;
     exports main;
 }

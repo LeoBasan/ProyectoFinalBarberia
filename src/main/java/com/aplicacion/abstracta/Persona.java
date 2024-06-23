@@ -12,7 +12,6 @@ public abstract class Persona {
     private String apellido;
     private String email;
     private String contrasena;
-    private List<Turno> turnos;
 
     public Persona(String dni,String nombre, String apellido, String email, String contrasena) {
         this.dni=dni;
@@ -20,7 +19,6 @@ public abstract class Persona {
         this.apellido = apellido;
         this.email = email;
         this.contrasena = contrasena;
-        this.turnos = new ArrayList<>();
     }
     public String getDni() {
         return dni;
@@ -52,13 +50,6 @@ public abstract class Persona {
         this.contrasena = contrasena;
     }
 
-    public List<Turno> getTurnos() {
-        return turnos;
-    }
-
-    public void setTurnos(List<Turno> turnos) {
-        this.turnos = turnos;
-    }
 
     public String getEmail() {
         return email;

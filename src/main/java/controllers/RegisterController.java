@@ -19,8 +19,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Map;
 
-public class RegisterController extends BaseController {
-
+public class RegisterController{
+    private ClienteRepository clienteRepository;
 
     private ClienteView clienteView;
     @FXML
@@ -98,6 +98,7 @@ public class RegisterController extends BaseController {
     @FXML
     public void initialize() {
         agregarListenerValidacion();
+        cargarRepo();
         this.clienteView = new ClienteView();//despues eliminar esto, solo es para ver en consola la carga correcta
         backButton.setOnAction(event -> goBack());//volver atras con el boton back
         registerButton.setOnAction(event -> handleRegister());//si se registra lo mando al repo
@@ -237,9 +238,6 @@ public class RegisterController extends BaseController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfaz/login.fxml"));
             Parent root = loader.load();
-            BaseController controller= loader.getController();
-            controller.setClienteRepository(ClienteRepository.getInstance());
-            controller.setBarberoRepository(BarberoRepository.getInstance());
             Stage stage = (Stage) registerAnchorPane.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException e) {
@@ -255,7 +253,9 @@ public class RegisterController extends BaseController {
         alert.setOnHidden(evt -> irAlLogin());
         alert.show();
     }
-
+    private void cargarRepo(){
+        clienteRepository= ClienteRepository.getInstance();
+    }
 
     @FXML
     private void handleRegister() { ///aca hacer validaciones con listener en tiempo real
@@ -278,8 +278,8 @@ public class RegisterController extends BaseController {
 
 
             Cliente newCliente = new Cliente(dni, nombre, apellido, email, contrasena, telefono, direccion);
-            getClienteRepository().add(newCliente);
-            Map<String, Cliente> mapaCliente = getClienteRepository().getMapaCliente();
+            clienteRepository.add(newCliente);
+            Map<String, Cliente> mapaCliente = clienteRepository.getMapaCliente();
             clienteView.viewClientes(mapaCliente);
 
             errorMessage.setText("");
