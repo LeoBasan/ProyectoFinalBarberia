@@ -1,7 +1,11 @@
 package controllers;
 
 import com.aplicacion.barbero.Barbero;
+import com.aplicacion.barbero.BarberoRepository;
 import com.aplicacion.cliente.Cliente;
+import com.aplicacion.cliente.ClienteRepository;
+import com.aplicacion.login.Login;
+import com.aplicacion.login.LoginTemporal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,14 +21,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class MenuMainController extends BaseController {
-    private MenuBarberoController menuBarberoController;
-    private MenuTurnosController menuTurnosController;
-    private MenuClienteController menuClienteController;
-
+public class MenuMainController{
     private Map<Button,AnchorPane> buttonToFormMap= new HashMap<>();
+    private LoginTemporal loginTemporal;
     //Panel ppal
     @FXML
     private StackPane stackPaneMenu;
@@ -68,6 +70,7 @@ public class MenuMainController extends BaseController {
     @FXML
     private AnchorPane menuTurnos;
 
+
     //------------------------------------------------------------------
     private Button selectedButton;//Almecena el boton seleccionado
     @FXML
@@ -75,10 +78,15 @@ public class MenuMainController extends BaseController {
         buttonToFormMap.put(historialButton,menuClientes);
         buttonToFormMap.put(addTurnoButton,menuTurnos);
         buttonToFormMap.put(modifyProfileButton,menuModPerfil);
+
         selectedButton= historialButton;
         switchForm(new ActionEvent(historialButton,null));
+        cargarRepositorios();
+        updateUIBasedOnUser();
 
+        System.out.println("Menu main Cliente: "+loginTemporal.getListLogin().get(0));
         //listeners para cada boton
+
         historialButton.setOnAction(this::switchForm);
         addTurnoButton.setOnAction(this::switchForm);
         modifyProfileButton.setOnAction(this::switchForm);
@@ -103,25 +111,20 @@ public class MenuMainController extends BaseController {
             addTurnoButton.setDisable(false);
         }
     }
-    public void setCliente(Cliente cliente){
-        super.setCliente(cliente);
-        updateUIBasedOnUser();
-    }
-    public void setBarbero(Barbero barbero){
-        super.setBarbero(barbero);
-        updateUIBasedOnUser();
+    private void cargarRepositorios(){
+        loginTemporal= LoginTemporal.getInstance();
     }
     private boolean typeOfUser(){//si viene de cliente retorna true sino false
-        return getCliente()!=null;
+        List<Login> aux=loginTemporal.getListLogin();
+        if(!aux.get(0).getDniCliente().equals("n")){
+            return true;
+        }
+        return false;
     }
     private void handleLogout(){
         try{
             FXMLLoader loader= new FXMLLoader(getClass().getResource("/interfaz/login.fxml"));
             Parent root= loader.load();
-            BaseController controller= loader.getController();
-            controller.setClienteRepository(getClienteRepository());
-            controller.setBarberoRepository(getBarberoRepository());
-
             Stage stage= (Stage) logOutButton.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();

@@ -32,4 +32,12 @@ public class Cliente extends Persona {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "numTelefono='" + numTelefono + '\'' +
+                ", direccion='" + direccion + '\'' +
+                '}';
+    }
 }

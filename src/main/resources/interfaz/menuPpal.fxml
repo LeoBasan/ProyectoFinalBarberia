@@ -38,8 +38,8 @@
                <center>
                   <AnchorPane fx:id="anchorPaneCenter" prefHeight="700.0" prefWidth="700.0" stylesheets="@dashboardDesign.css" BorderPane.alignment="CENTER_LEFT">
                      <children>
-                        <AnchorPane fx:id="menuClientes" layoutX="37.0" layoutY="47.0" prefHeight="653.0" prefWidth="600.0" styleClass="shadow" visible="false" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="20.0">
-                              <fx:include fx:id="menuClientesInclude" source="menuClientes.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <AnchorPane fx:id="menuClientes"  layoutX="37.0" layoutY="47.0" prefHeight="653.0" prefWidth="600.0" styleClass="shadow" visible="false" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="20.0">
+                              <fx:include fx:id="menuClientesInclude" source="menuHistorial.fxml"  AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                         </AnchorPane>
                         <AnchorPane fx:id="menuModPerfil" layoutX="37.0" layoutY="47.0" prefHeight="600.0" prefWidth="600.0" styleClass="shadow" visible="false" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="20.0">
                               <fx:include fx:id="menuModPerfilInclude" source="menuModPerfil.fxml" />

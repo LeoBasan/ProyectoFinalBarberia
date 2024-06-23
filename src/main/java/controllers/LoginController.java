@@ -4,6 +4,8 @@ import com.aplicacion.barbero.Barbero;
 import com.aplicacion.barbero.BarberoRepository;
 import com.aplicacion.cliente.Cliente;
 import com.aplicacion.cliente.ClienteRepository;
+import com.aplicacion.login.Login;
+import com.aplicacion.login.LoginTemporal;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +18,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class LoginController extends BaseController{
+public class LoginController{
+    private ClienteRepository clienteRepository;
+    private BarberoRepository barberoRepository;
+    private LoginTemporal loginTemporal;
 
     @FXML
     private AnchorPane anchorPane;
@@ -58,6 +63,7 @@ public class LoginController extends BaseController{
     private Label welcomeMessageLabel;
 
     public void initialize(){
+        cargarRepos();
         logginButton.setOnAction(event -> handleLogin());//lo mando a loguearse, y falta despues que avance al siguiente menu
         buttonBack.setOnAction(event->goBack());//lo mando al menu de inicio
     }
@@ -80,28 +86,19 @@ public class LoginController extends BaseController{
         alert.showAndWait();
     }
 
-    public void showAlertConfirmationLogin(String title,String message, Object usuario){
+    public void showAlertConfirmationLogin(String title,String message){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.show();
-        alert.setOnHidden(evt ->irAlMenu(usuario));
+        alert.setOnHidden(evt ->irAlMenu());
     }
 
-    public void irAlMenu(Object usuario){
+    public void irAlMenu(){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfaz/menuPpal.fxml"));
             Parent root = loader.load();
-            BaseController controller= loader.getController();
-            controller.setClienteRepository(getClienteRepository());
-            controller.setBarberoRepository(getBarberoRepository());
-
-            if (usuario instanceof Cliente) {
-                controller.setCliente((Cliente) usuario);
-            } else if (usuario instanceof Barbero) {
-                controller.setBarbero((Barbero) usuario);
-            }
             Stage stage = (Stage) anchorPane.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
@@ -114,16 +111,25 @@ public class LoginController extends BaseController{
         String email= emailField.getText();
         String password= passwordField.getText();
 
-        Cliente cliente= getClienteRepository().findByEmailAndPassword(email,password);
-        Barbero barbero= getBarberoRepository().findByEmailAndPassword(email,password);
+        Cliente cliente= clienteRepository.findByEmailAndPassword(email,password);
+        Barbero barbero= barberoRepository.findByEmailAndPassword(email,password);
 
         if(cliente!=null){
-            showAlertConfirmationLogin("Inicio de sesion Exitoso", "el cliente fue encontrado.", cliente);
+            showAlertConfirmationLogin("Inicio de sesion Exitoso", "el cliente fue encontrado.");
+            Login aux= new Login(cliente.getDni(),"n");
+            loginTemporal.addLogin(aux);
         }
         else if (barbero!= null) {
-            showAlertConfirmationLogin("Inicio de sesion Exitoso", "el barbero fue encontrado.", barbero);
+            showAlertConfirmationLogin("Inicio de sesion Exitoso", "el barbero fue encontrado.");
+            Login aux= new Login("n",barbero.getDni());
+            loginTemporal.addLogin(aux);
         }else {
            showAlertErrorLogin("Error" , "El usuario no fue encontrado.");
         }
+    }
+    private void cargarRepos(){
+        clienteRepository= ClienteRepository.getInstance();
+        barberoRepository= BarberoRepository.getInstance();
+        loginTemporal= LoginTemporal.getInstance();
     }
 }

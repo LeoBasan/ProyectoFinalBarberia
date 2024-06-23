@@ -17,10 +17,10 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ClienteRepository implements Irepository<Cliente> , IManejoDeTurnos<Turno> {
+public class ClienteRepository implements Irepository<Cliente>{
     private static final String FILE_PATH= "src/main/resources/json/cliente.json";
     private static ClienteRepository instance;//uso esta variable para ver si esta instanciada
-    private Map<String,Cliente> mapaCliente = new HashMap<>();
+    private Map<String,Cliente> mapaCliente;
     private Gson gson;
 
     private ClienteRepository() {
@@ -103,10 +103,10 @@ public class ClienteRepository implements Irepository<Cliente> , IManejoDeTurnos
     public void update(Cliente obj) {
         this.mapaCliente.put(obj.getDni(),obj);
     }
-
+    /*
     @Override
     public void addTurno(Turno turno) { ///verificar anteriormente si el barbero tiene disponible el turno.
-        Cliente cliente = this.mapaCliente.get(turno.getCliente().getDni());
+        Cliente cliente = this.mapaCliente.get(turno.getDniCliente());
         cliente.getTurnos().add(turno);
         saveCliente();
     }
@@ -114,14 +114,14 @@ public class ClienteRepository implements Irepository<Cliente> , IManejoDeTurnos
     @Override
     public void removeTurno(Turno turno) {///todas estas funciones las hacemos teniendo en cuenta que estamos
                                         // ubicados en la posicion de memoria del cliente por lo que accedemos rapidamente
-           Cliente cliente = this.mapaCliente.get(turno.getCliente().getDni());
+           Cliente cliente = this.mapaCliente.get(turno.getDniCliente());
            cliente.getTurnos().remove(turno);
            saveCliente();
     }
 
     @Override
     public boolean existenceTurno(Turno turno) { ///devolvemos false si el turno no esta disponible, y true en caso de que lo este.
-        Cliente clienteaux = turno.getCliente();
+        Cliente clienteaux = this.mapaCliente.get(turno.getDniCliente());
         if(clienteaux == null){
             return true;
         }
@@ -131,7 +131,7 @@ public class ClienteRepository implements Irepository<Cliente> , IManejoDeTurnos
             }
         }
         return true;
-    }
+    }*/
     public boolean existenceEmail( String email){ ///devuelve falso en el caso de que no este disponible ese gmail, True si se puede usar
         for ( Map.Entry<String,Cliente> entrada : this.mapaCliente.entrySet()){
             if(entrada.getValue().getEmail().equals(email)){
