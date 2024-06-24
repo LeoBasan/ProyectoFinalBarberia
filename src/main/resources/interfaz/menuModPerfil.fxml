@@ -8,12 +8,18 @@
 <?import javafx.scene.text.Font?>
 
 
+<?import javafx.scene.control.Label?>
 <AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ModPerfilController">
    <children>
       <TextField fx:id="nameTextField" layoutX="67.0" layoutY="75.0" prefHeight="26.0" prefWidth="233.0" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="100.0" />
       <TextField fx:id="lastNameTextField" layoutX="70.0" layoutY="175.0" prefHeight="26.0" prefWidth="233.0" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="200.0" />
       <TextField fx:id="adressTextField" layoutX="70.0" layoutY="275.0" prefHeight="26.0" prefWidth="233.0" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="300.0" />
       <TextField fx:id="phoneTextField" layoutX="70.0" layoutY="389.0" prefHeight="26.0" prefWidth="233.0" styleClass="jfx-text-field" stylesheets="@dashboardDesign.css" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="400.0" />
+      <Label fx:id="nombreError" layoutX="147.0" layoutY="130.0" textFill="red" />
+      <Label fx:id="apellidoError" layoutX="147.0" layoutY="230" textFill="red" />
+      <Label fx:id="direccionError" layoutX="147.0" layoutY="330" textFill="red" />
+      <Label fx:id="telefonoError" layoutX="147.0" layoutY="430" textFill="red" />
+      <Label fx:id="errorMensaje" layoutX="100" layoutY="250" textFill="red" />
       <ImageView fx:id="icon1" fitHeight="40.0" fitWidth="40.0" layoutX="81.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../imagenes/editIcon.png" />

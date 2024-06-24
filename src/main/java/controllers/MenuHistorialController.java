@@ -52,6 +52,9 @@ public class MenuHistorialController{
     private Button button_eliminar_turno;
     @FXML
     private ImageView delete_logo;
+    //Refresh Button
+    @FXML
+    private Button refreshButton;
 
     private ObservableList<Turno> turnoList =
             FXCollections.observableArrayList();
@@ -59,27 +62,17 @@ public class MenuHistorialController{
     public void initialize(){
         cargarRepositorios();
         configurarColumnasHistorialCliente();
-        System.out.println("login en historial: "+loginTemporal.getListLogin().get(0));
-        cargarTurnosEntabla(dniLogueado(loginTemporal.getListLogin().get(0)));
+        String[] aux= dniLogueado(loginTemporal.getListLogin().get(0));
+        cargarTurnosEntabla(aux[0],aux[1]);
         button_eliminar_turno.setOnAction(ev->eliminarTurnoSeleccionado());
-        //System.out.println("Cliente en historial: "+cliente);
+        refreshButton.setOnAction(eve->refrescarTabla());
     }
-    public void posInitialize(){
-
-//        updateUIBasedOnUser();
-        //System.out.println("Cliente en historial: "+cliente);
-//        configurarColumnasHistorialCliente();
-//        System.out.println("Se rompio");
-//        cargarTurnosEntabla(cliente.getDni());
-        //historial_turnos_tabla= new TableView<>();
-    }
-    private String dniLogueado(Login login){
+    private String[] dniLogueado(Login login){
         if(!login.getDniCliente().equals("n")){
-            return login.getDniCliente();
+            return new String[]{login.getDniCliente(),"1"};
         }
-        return login.getDniBarbero();
+        return new String[]{login.getDniBarbero(),"2"};
     }
-
     private void configurarColumnasHistorialCliente(){
         columna_id_historial_turnos.setCellValueFactory(new PropertyValueFactory<>("id"));
         columna_barbero_historial_turnos.setCellValueFactory(new PropertyValueFactory<>("dniBarbero"));
@@ -92,11 +85,14 @@ public class MenuHistorialController{
         });
         historial_turnos_tabla.setEditable(false);
         historial_turnos_tabla.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        historial_turnos_tabla.refresh();
     }
-    private void cargarTurnosEntabla(String dni){
-        cargarRepositorios();
-        List<Turno> aux=turnoRepository.devolverTurnosDni(dni,(byte) 1);
+    private void cargarTurnosEntabla(String dni, String type){
+        List<Turno> aux;
+        if(type.equals("1")){
+            aux=turnoRepository.devolverTurnosDni(dni,(byte) 1);
+        }else{
+            aux=turnoRepository.devolverTurnosDni(dni,(byte) 0);
+        }
         turnoList=FXCollections.observableArrayList(aux);
         historial_turnos_tabla.setItems(turnoList);
     }
@@ -116,5 +112,9 @@ public class MenuHistorialController{
         barberoRepository= BarberoRepository.getInstance();
         turnoRepository= TurnoRepository.getInstance();
         loginTemporal= LoginTemporal.getInstance();
+    }
+    private void refrescarTabla() {
+        String[] aux = dniLogueado(loginTemporal.getListLogin().get(0));
+        cargarTurnosEntabla(aux[0], aux[1]);
     }
 }

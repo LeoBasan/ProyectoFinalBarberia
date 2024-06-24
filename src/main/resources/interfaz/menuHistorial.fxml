@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="historial_cliente" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuHistorialController">
+<AnchorPane fx:id="historial_cliente" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuHistorialController">
    <children>
-      <TableView fx:id="historial_turnos_tabla" layoutX="7.0" layoutY="95.0" prefHeight="383.0" prefWidth="586.0" styleClass="table-row-cell" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="122.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0">
+      <TableView fx:id="historial_turnos_tabla" layoutX="7.0" layoutY="95.0" prefHeight="328.0" prefWidth="586.0" styleClass="table-row-cell" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="177.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0">
         <columns>
           <TableColumn fx:id="columna_id_historial_turnos" minWidth="66.0" prefWidth="66.0" text="ID" />
           <TableColumn fx:id="columna_date_historial_turnos" minWidth="140.0" prefWidth="210.0" text="Date" />
@@ -24,7 +24,7 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="button_eliminar_turno" layoutX="223.0" layoutY="505.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="154.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="Eliminar Turno" AnchorPane.leftAnchor="223.0" AnchorPane.rightAnchor="223.0">
+      <Button fx:id="button_eliminar_turno" layoutX="56.0" layoutY="483.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="154.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="Eliminar Turno" AnchorPane.leftAnchor="56.0" AnchorPane.rightAnchor="390.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -32,6 +32,18 @@
             <ImageView fx:id="delete_logo" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../imagenes/eliminar.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="refreshButton" layoutX="391.0" layoutY="483.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="154.0" styleClass="add-btn-center" stylesheets="@dashboardDesign.css" text="Refrescar">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <graphic>
+            <ImageView fx:id="refresh_logo" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes/refresh.png" />
                </image>
             </ImageView>
          </graphic>

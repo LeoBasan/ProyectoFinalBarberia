@@ -103,49 +103,12 @@ public class ClienteRepository implements Irepository<Cliente>{
     public void update(Cliente obj) {
         this.mapaCliente.put(obj.getDni(),obj);
     }
-    /*
-    @Override
-    public void addTurno(Turno turno) { ///verificar anteriormente si el barbero tiene disponible el turno.
-        Cliente cliente = this.mapaCliente.get(turno.getDniCliente());
-        cliente.getTurnos().add(turno);
-        saveCliente();
-    }
-
-    @Override
-    public void removeTurno(Turno turno) {///todas estas funciones las hacemos teniendo en cuenta que estamos
-                                        // ubicados en la posicion de memoria del cliente por lo que accedemos rapidamente
-           Cliente cliente = this.mapaCliente.get(turno.getDniCliente());
-           cliente.getTurnos().remove(turno);
-           saveCliente();
-    }
-
-    @Override
-    public boolean existenceTurno(Turno turno) { ///devolvemos false si el turno no esta disponible, y true en caso de que lo este.
-        Cliente clienteaux = this.mapaCliente.get(turno.getDniCliente());
-        if(clienteaux == null){
+    public boolean existenceDNI(String dni){ ///devuelve true en el caso de que el dni ya se encuentre
+        // registrado y false en el caso de que nadie lo tenga
+        if(mapaCliente.containsKey(dni)){
             return true;
         }
-        for(Turno turnoaux : clienteaux.getTurnos()){
-            if(turnoaux.getDate().equals(turno.getDate()) && turnoaux.getTime().equals(turno.getTime())){
-                return  false;
-            }
-        }
-        return true;
-    }*/
-    public boolean existenceEmail( String email){ ///devuelve falso en el caso de que no este disponible ese gmail, True si se puede usar
-        for ( Map.Entry<String,Cliente> entrada : this.mapaCliente.entrySet()){
-            if(entrada.getValue().getEmail().equals(email)){
-                return false;
-            }
-        }
-        return true;
-    }
-    public boolean existenceDNI(Cliente cliente){ ///devuelve falso en el caso de que el dni ya se encuentre
-        // registrado y true en el caso de que nadie lo tenga
-        if(mapaCliente.containsKey(cliente.getDni())){
-            return false;
-        }
-        return true;
+        return false;
     }
 
 

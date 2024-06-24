@@ -20,7 +20,8 @@ import java.io.IOException;
 import java.util.Map;
 
 public class RegisterController{
-    private ClienteRepository clienteRepository;
+    private ClienteRepository clienteRepository = ClienteRepository.getInstance();
+    private BarberoRepository barberoRepository = BarberoRepository.getInstance();
 
     private ClienteView clienteView;
     @FXML
@@ -84,6 +85,7 @@ public class RegisterController{
     private Label lastNameErrorLabel;
     @FXML
     private Label dniErrorLabel;
+    @FXML Label dniErrorLabel2;
     @FXML
     private Label passwordErrorLabel;
     @FXML
@@ -103,7 +105,6 @@ public class RegisterController{
         backButton.setOnAction(event -> goBack());//volver atras con el boton back
         registerButton.setOnAction(event -> handleRegister());//si se registra lo mando al repo
     }
-
     private void goBack() {//metodo para retroceder al menu inicial
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfaz/inicio.fxml"));//vuelvo al fxml del inicio
@@ -114,14 +115,12 @@ public class RegisterController{
             e.printStackTrace();
         }
     }
-
     //Sobrecarga de metodos
     public void validarCamposVacios(String valor, String fieldName) {
         if (valor.trim().isEmpty()) {
             throw new CampoVacioException("El campo " + fieldName + " no puede estar vacío");
         }
     }
-
     public void validarCamposVacios(String nombre, String apellido, String dni, String contrasena, String direccion, String telefono) {
         if (nombre.trim().isEmpty()) throw new CampoVacioException("error. el campo nombre no puede estar vacío.");
         if (apellido.trim().isEmpty()) throw new CampoVacioException("error. el campo apellido no puede estar vacío.");
@@ -132,43 +131,41 @@ public class RegisterController{
             throw new CampoVacioException("error. el campo dirección no puede estar vacío.");
         if (telefono.trim().isEmpty()) throw new CampoVacioException("error. el campo teléfono no puede estar vacío.");
     }
-
     public void validarSoloLetras(String valor, String fieldName) {
         if (!valor.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]+$")) {  //Es una expresion regular que asegura que la cadena solo contenga letras sin numeros ni caracteres especiales ni espacios
             throw new SoloLetrasException("El campo " + fieldName + " solo tiene que tener letras.");
         }
     }
-
     public void validarSoloNumeros(String valor, String fieldName) {
         if (!valor.matches("\\d{10}")) { //Es una expresion regular que asegura que la cadena sea de 10 digitos
             throw new SoloNumerosException("El campo " + fieldName + " debe contener 10 dígitos.");
         }
     }
-
     public void validarLetrasYNumeros(String valor, String fieldname) {
         if (!valor.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]+\\s\\d{1,5}$")) {  //verifica que el usuario no pueda poner como primer caracter un espacio, despues que haya letras separado de un unico espacio y despues hasta 5 numeros
             throw new LetrasyNumerosException("El campo " + fieldname + " debe contener letras y números");
         }
     }
-
-    public void validarEmail(String valor, String fieldName) { //me faltaria verificar si el email existe dentro del mapa Usuario para evitar que se repita
+    public void validarEmail(String valor, String fieldName) {
         if (!valor.matches("^[\\w._%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) { //verifica que la cadena de caracteres contiene un "@" y un "."
             throw new EmailException("El campo " + fieldName + " debe poseer un formato valido");
         }
     }
-
     public void validarDni(String valor, String fieldName) {
         if (!valor.matches("^\\d{7,8}$")) { //verifica que sean solo o 7 o 8 digitos.
             throw new DniInvalidoException("El campo " + fieldName + " no es valido");
         }
     }
-
+    public void validarDniDisponible(String valor, String fieldName){
+        if (clienteRepository.existenceDNI(valor) || barberoRepository.findDni(valor)){
+            throw new DniExistenteException("El DNI " + valor + " ya está registrado"); //si encuentra el dni en el repositorio de los clientes
+        }
+    }
     public void validarContrasena(String valor, String fieldName) { //verifica que la contra sea de minimo 6 caracteres
         if (!valor.matches("^.{6,}$")) {
             throw new PasswordException("El campo " + fieldName + " debe tener minimo 6 caracteres");
         }
     }
-
     public void agregarListener(TextField textField, Label errorLabel, String fieldname) { //sirve para validar el texto en tiempo real
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             ;
@@ -184,14 +181,14 @@ public class RegisterController{
                     validarEmail(newValue, fieldname);
                 } else if (fieldname.equalsIgnoreCase("Dni")) {
                     validarDni(newValue, fieldname);
+                    validarDniDisponible(newValue,fieldname);
                 } else if (fieldname.equalsIgnoreCase("Contraseña")) {
                     validarContrasena(newValue, fieldname);
                 }
-
                 errorLabel.setText("");
                 errorMessage.setText("");
             } catch (CampoVacioException | SoloLetrasException | SoloNumerosException | LetrasyNumerosException |
-                     EmailException | DniInvalidoException |
+                     EmailException | DniInvalidoException | DniExistenteException |
                      PasswordException e) {  // se utiliza el | para capturar mas de una excepcion en el mismo catch
                 errorLabel.setTextFill(Color.RED);
                 if (e instanceof CampoVacioException) {
@@ -208,24 +205,23 @@ public class RegisterController{
                     errorLabel.setText("El campo " + fieldname + " no es valido");
                 } else if (e instanceof PasswordException) {
                     errorLabel.setText("El campo " + fieldname + " debe poseer minimo 6 caracteres");
+                }else if( e instanceof DniExistenteException){
+                    errorLabel.setText("El campo " + fieldname + " ya fue registrado");
                 }
                 errorMessage.setText("Error: " + e.getMessage()); // muestra el mensaje de error
-
             }
         });
     }
-
     public void agregarListenerValidacion() {
         agregarListener(nameField, nameErrorLabel, "Nombre");
         agregarListener(lastNameField, lastNameErrorLabel, "Apellido");
         agregarListener(dniField, dniErrorLabel, "Dni");
+        agregarListener(dniField,dniErrorLabel2,"Dni");
         agregarListener(passwordField, passwordErrorLabel, "Contraseña");
         agregarListener(adressField, addressErrorLabel, "Direccion");
         agregarListener(phoneNumberField, phoneNumberErrorLabel, "Telefono");
         agregarListener(emailField, emailErrorLabel, "Email");
     }
-
-
     private void showAlertError(String title, String message) {   //En caso de que aprete el boton de registro y no se cumpla alguna de las validaciones va aparecer por pantalla un mensaje de error
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -233,7 +229,6 @@ public class RegisterController{
         alert.setContentText(message);
         alert.showAndWait();
     }
-
     private void irAlLogin() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfaz/login.fxml"));
@@ -244,7 +239,6 @@ public class RegisterController{
             e.printStackTrace();
         }
     }
-
     private void showAlertConfirmation(String title, String message) {  //En caso de que todos los campos sean validos, le mostrara al usuario una alerta de que se registro correctamente y una vez que haga click en aceptar, dicho evento lo mandara al login
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -256,7 +250,6 @@ public class RegisterController{
     private void cargarRepo(){
         clienteRepository= ClienteRepository.getInstance();
     }
-
     @FXML
     private void handleRegister() { ///aca hacer validaciones con listener en tiempo real
         try {
@@ -275,7 +268,7 @@ public class RegisterController{
             validarLetrasYNumeros(direccion, "Direccion");
             validarSoloNumeros(telefono, "Telefono");
             validarDni(dni, "Dni");
-
+            validarDniDisponible(dni,"Dni");
 
             Cliente newCliente = new Cliente(dni, nombre, apellido, email, contrasena, telefono, direccion);
             clienteRepository.add(newCliente);
@@ -290,7 +283,7 @@ public class RegisterController{
             System.err.println("Error: " + e.getMessage()); //System err se utiliza para imprimir mensajes de error
             showAlertError("Error", "Rellene todos los campos obligatorios.");
         } catch (SoloLetrasException | SoloNumerosException | LetrasyNumerosException | EmailException |
-                 DniInvalidoException | PasswordException e) {
+                 DniInvalidoException | PasswordException | DniExistenteException e ) {
             errorMessage.setText("Error: " + e.getMessage());
             System.err.println("Error: " + e.getMessage());
             showAlertError("Error de Validación", e.getMessage());

@@ -15,7 +15,6 @@ public class Turno {
     private LocalTime time;
 
     public Turno(String dniCliente, String dniBarbero, LocalDate date, LocalTime time) {
-        this.id = UUID.randomUUID().toString();
         this.dniCliente = dniCliente;
         this.dniBarbero = dniBarbero;
         this.date = date;

@@ -77,7 +77,6 @@ public class LoginController{
             e.printStackTrace();
         }
     }
-
     public void showAlertErrorLogin(String title, String message){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -85,7 +84,6 @@ public class LoginController{
         alert.setContentText(message);
         alert.showAndWait();
     }
-
     public void showAlertConfirmationLogin(String title,String message){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -94,7 +92,6 @@ public class LoginController{
         alert.show();
         alert.setOnHidden(evt ->irAlMenu());
     }
-
     public void irAlMenu(){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfaz/menuPpal.fxml"));
@@ -106,7 +103,6 @@ public class LoginController{
             e.printStackTrace();
         }
     }
-
     private void handleLogin(){
         String email= emailField.getText();
         String password= passwordField.getText();
@@ -115,12 +111,12 @@ public class LoginController{
         Barbero barbero= barberoRepository.findByEmailAndPassword(email,password);
 
         if(cliente!=null){
-            showAlertConfirmationLogin("Inicio de sesion Exitoso", "el cliente fue encontrado.");
+            showAlertConfirmationLogin("Inicio de sesion Exitoso", "El cliente fue encontrado.");
             Login aux= new Login(cliente.getDni(),"n");
             loginTemporal.addLogin(aux);
         }
         else if (barbero!= null) {
-            showAlertConfirmationLogin("Inicio de sesion Exitoso", "el barbero fue encontrado.");
+            showAlertConfirmationLogin("Inicio de sesion Exitoso", "El barbero fue encontrado.");
             Login aux= new Login("n",barbero.getDni());
             loginTemporal.addLogin(aux);
         }else {

@@ -11,9 +11,15 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Properties;
 
 public class MenuTurnosController{
     private LoginTemporal loginTemporal;
@@ -77,7 +83,8 @@ public class MenuTurnosController{
         setInitialButtonsState();
         addDatePickerListener();
 
-        // Seleccionar inicialmente el luchoButton
+        // Seleccionar inicialmente el luchoButton y la fecha de hoy
+        datePickerTurno.setValue(LocalDate.now());
         luchoButton.setStyle("-fx-background-color: lightgreen;");
         selectedDni = (String) luchoButton.getUserData();
         updateAvaibleTimes(selectedDate, selectedDni);
@@ -115,7 +122,6 @@ public class MenuTurnosController{
         leoButton.setStyle("");
         luchoButton.setStyle("");
     }
-
     private void resetTimeButtonStyles() {
         nineHsButton.setStyle("");
         tenHsButton.setStyle("");
@@ -197,6 +203,7 @@ public class MenuTurnosController{
                     saveAppointment(selectedDni,selectedDate,selectedTime);
                 }
             });
+            updateAvaibleTimes(selectedDate,selectedDni);
         }
     }
     private void checkConfirmButtonState(){
@@ -205,7 +212,9 @@ public class MenuTurnosController{
     private void saveAppointment(String dni, LocalDate date,LocalTime time){
         String getDniCliente=loginTemporal.getListLogin().get(0).getDniCliente();
         if(getDniCliente!="n"){
-            turnoRepository.addTurno(new Turno(getDniCliente,dni,date,time));
+            Turno nuevoTurno= new Turno(getDniCliente,dni,date,time);
+            turnoRepository.addTurno(nuevoTurno);
+            enviarCorreoConfirmation(nuevoTurno);
         }
     }
     private void showAlert(String title, String header, String content) {
@@ -220,5 +229,43 @@ public class MenuTurnosController{
         barberoRepository=BarberoRepository.getInstance();
         clienteRepository=ClienteRepository.getInstance();
         turnoRepository=TurnoRepository.getInstance();
+    }
+    private void enviarCorreoConfirmation(Turno turno) {
+        System.out.println(turno.getDniBarbero());
+        String dniBarbero = turno.getDniBarbero();
+        Cliente aux = clienteRepository.findId(turno.getDniCliente());
+        Barbero aux2 = barberoRepository.findId(dniBarbero);
+
+        String emailCliente = aux.getEmail();
+        String nombreCliente = aux.getNombre();
+        String apellidoCliente = aux.getApellido();
+        String nombreBarbero = aux2.getNombre();
+        String apellidoBarbero = aux2.getApellido();
+
+        LocalDateTime fecha = LocalDateTime.of(turno.getDate(), turno.getTime());
+        DateTimeFormatter fechaString = DateTimeFormatter.ofPattern("dd 'de' MMMM 'a las' HH:mm");
+        String fechaFormateada = fecha.format(fechaString);
+
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP de gmail
+        props.put("mail.smtp.port", "587"); //Puerto 587
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+
+        Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("barberclean0@gmail.com", "gtvqctjarntpykkx");  //Mail de barberClean y contraseña para que se mande mensaje automatico con la confirmacion de turno
+            }
+        });
+        try{
+            MimeMessage message = new MimeMessage(session);
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailCliente, true));
+            message.setSubject("Confirmación de Turno");
+            message.setText("Hola " +nombreCliente + " " + apellidoCliente + "!.\n\n" + "Gracias por confirmar tu turno.Estamos emocionados de recibirte en nuestro salon.Aquí están los detalles de tu turno:\n Fecha y hora: " + fechaFormateada + ".\nProfesional Asignado: " + nombreBarbero + " " + apellidoBarbero+".\nRecuerda que, si por alguna razón no puedes asistir,te pedimos amablemente que canceles tu turno.\nEsperamos con ganas tu visita y aseguramos brindarte un excelente servicio. ");
+            Transport.send(message);
+            System.out.println("Mensaje enviado exitosamente...");
+        }catch (MessagingException e){
+            e.printStackTrace();
+        }
     }
 }

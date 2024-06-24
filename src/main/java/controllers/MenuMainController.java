@@ -84,9 +84,7 @@ public class MenuMainController{
         cargarRepositorios();
         updateUIBasedOnUser();
 
-        System.out.println("Menu main Cliente: "+loginTemporal.getListLogin().get(0));
         //listeners para cada boton
-
         historialButton.setOnAction(this::switchForm);
         addTurnoButton.setOnAction(this::switchForm);
         modifyProfileButton.setOnAction(this::switchForm);

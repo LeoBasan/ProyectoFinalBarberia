@@ -23,7 +23,7 @@ public class TurnoRepository implements IManejoDeTurnos<Turno> {
     private Gson gson= new Gson();
     private static TurnoRepository instance;
     private List<Turno> listaTurnos;
-
+    private static int ultimoId=0;
 
     public static TurnoRepository getInstance(){
         if(instance==null){//si no fue instanciada
@@ -46,6 +46,12 @@ public class TurnoRepository implements IManejoDeTurnos<Turno> {
             if (listaTurnos == null){
                 listaTurnos= new ArrayList<>();
             }
+            for (Turno turno : listaTurnos) {
+                int turnoId = Integer.parseInt(turno.getId());
+                if (turnoId > ultimoId) {
+                    ultimoId = turnoId;
+                }
+            }
         }catch (FileNotFoundException e){
             listaTurnos = new ArrayList<>();
         } catch (IOException e ){
@@ -60,7 +66,9 @@ public class TurnoRepository implements IManejoDeTurnos<Turno> {
         }
     }
     @Override
-    public void addTurno(Turno turno) {//Fijarse turnos repetidos con id
+    public void addTurno(Turno turno) {//Id autoSeteable
+        ultimoId++;
+        turno.setId(String.valueOf(ultimoId));
         listaTurnos.add(turno);
         saveTurnos();
     }
@@ -101,7 +109,6 @@ public class TurnoRepository implements IManejoDeTurnos<Turno> {
                 }
             }
         }
-//        System.out.println("Lista dni: "+listaDNI);
         return listaDNI;
     }
     public List<Turno> devolverTurnosFecha(LocalDate date,String dni){
@@ -111,7 +118,6 @@ public class TurnoRepository implements IManejoDeTurnos<Turno> {
                 if(turno.getDniBarbero().equals(dni)){
                     fechaTurnos.add(turno);
                 }
-//                System.out.println("Fecha: "+date);
             }
         }
         return fechaTurnos;

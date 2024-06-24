@@ -2,6 +2,7 @@ module prueba.pruebaloginccs {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.google.gson;
+    requires java.mail;
     opens com.aplicacion.abstracta to com.google.gson;
     opens com.aplicacion.barbero to com.google.gson;
     opens com.aplicacion.cliente to com.google.gson;

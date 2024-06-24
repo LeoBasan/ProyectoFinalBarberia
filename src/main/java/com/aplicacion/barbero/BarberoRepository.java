@@ -108,40 +108,18 @@ public class BarberoRepository implements Irepository<Barbero>{
         }
         return null;
     }
-
+    public boolean findDni(String dni){
+        for(Barbero bar: this.setBarberos){
+            if(bar.getDni().equals(dni)){
+                return true;
+            }
+        }
+        return false;
+    }
     @Override
     public void update(Barbero obj) {
         this.setBarberos.remove(obj);
         this.setBarberos.add(obj);
-      saveBarbero();
-    }
-    /*
-    @Override
-    public void addTurno(Turno turno) {
-        Barbero barbero = findId(turno.getDniBarbero());
-        barbero.getTurnos().add(turno);
         saveBarbero();
     }
-
-    @Override
-    public void removeTurno(Turno turno) { ///antes comprobar si existe
-        Barbero barbero = findId(turno.getDniBarbero());
-        barbero.getTurnos().remove(turno);
-        saveBarbero();
-    }
-
-    @Override
-    public boolean existenceTurno(Turno turno) { ///devuelvo true si existe, false si no existe el turno.
-        Barbero barberoaux = findId(turno.getDniBarbero());
-        if(barberoaux == null){
-            return false;
-        }
-        for(Turno turnoaux : barberoaux.getTurnos()){
-            if(turnoaux.getDate().equals(turno.getDate()) && turnoaux.getTime().equals(turno.getTime())){
-                return  true;
-            }
-        }
-        return false;
-    }*/
-
 }
